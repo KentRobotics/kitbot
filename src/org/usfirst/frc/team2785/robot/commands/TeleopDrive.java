@@ -22,7 +22,11 @@ public class TeleopDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Robot.oi.stick.getTrigger()) {
+    		Robot.drivebase.resetSensors();
+    	}
     	Robot.drivebase.driveV(Robot.oi.stick.getY(), -Robot.oi.stick.getX());
+    	Robot.drivebase.pushData();
     }
 
     // Make this return true when this Command no longer needs to run execute()

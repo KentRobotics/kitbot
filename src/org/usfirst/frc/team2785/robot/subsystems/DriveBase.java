@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2785.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.*;
 
 import org.usfirst.frc.team2785.misc.PIDOutputAbsorber;
@@ -28,15 +30,24 @@ public class DriveBase extends Subsystem {
 		dist_output = new PIDOutputAbsorber();
 		gyro_output = new PIDOutputAbsorber();
 		drive = new RobotDrive(RobotMap.leftFrontTalon, RobotMap.leftBackTalon, RobotMap.rightFrontTalon, RobotMap.rightBackTalon);
-	    distancePID = new PIDController(RobotMap.encP, RobotMap.encI, RobotMap.encD, RobotMap.leftEncoder, dist_output);
+	    distancePID = new PIDController(RobotMap.encP, RobotMap.encI, RobotMap.encD, leftEncoder, dist_output);
 	    steeringPID = new PIDController(RobotMap.gyroP, RobotMap.gyroI, RobotMap.gyroD, gyro, gyro_output);
+	    setup();
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public void setup() {
-		gyro.reset();
 		leftEncoder.setDistancePerPulse(360/250);
-		
+		distancePID.setContinuous();
+		distancePID.setAbsoluteTolerance(10);
+		steeringPID.setInputRange(0, 360);
+		steeringPID.setOutputRange(-1, 1);
+		steeringPID.setPercentTolerance(5);
+		resetSensors();
+	}
+	public void resetSensors() {
+		gyro.reset();
+		leftEncoder.reset();
 	}
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -48,6 +59,28 @@ public class DriveBase extends Subsystem {
     }
     public void driveV(double mag, double turn) {
     	drive.arcadeDrive(mag, turn);
+    }
+    public void setDriveTarget(double dist, double deg) {
+    	resetSensors();
+    	distancePID.setSetpoint(dist);
+    	steeringPID.setSetpoint(deg);
+    	distancePID.enable();
+    	steeringPID.enable();
+    }
+    public void driveD() {
+    	// assumes setDriveTarget done
+    	drive.arcadeDrive(distancePID.get(), steeringPID.get());
+    }
+    public void pushData() {
+    	SmartDashboard.putNumber("leftEncoder", leftEncoder.getDistance());
+    	SmartDashboard.putNumber("gyro", gyro.getAngle());
+    }
+    public void pidConstPush() {
+    	
+    	SmartDashboard.putNumber("", 12);
+    }
+    public void pidConstSet() {
+    	
     }
 }
 

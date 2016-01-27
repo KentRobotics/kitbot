@@ -21,8 +21,8 @@ public class RobotMap {
 	public static CANTalon leftBackTalon = new CANTalon(1);
 	public static CANTalon rightFrontTalon = new CANTalon(2);
 	public static CANTalon rightBackTalon = new CANTalon(3);
-	public static Encoder  leftEncoder = new Encoder(0,1);
-	public static AnalogGyro gyro = new AnalogGyro(0);
+	public static Encoder  leftEncoder = new Encoder(0,1,false,Encoder.EncodingType.k4X);
+	public static AnalogGyro gyro = new AnalogGyro(1);
 	public static final double encP = 0;
 	public static final double encI = 0;
 	public static final double encD = 0;

@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2785.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -35,7 +37,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivebase = new DriveBase();
         chooser = new SendableChooser();
-        chooser.addDefault("drive forward", new ExampleCommand());
+        chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, 8));
         chooser.addObject("do a 180", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);

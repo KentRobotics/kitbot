@@ -21,9 +21,9 @@ public class RobotMap {
 	public static CANTalon leftBackTalon = new CANTalon(1);
 	public static CANTalon rightFrontTalon = new CANTalon(2);
 	public static CANTalon rightBackTalon = new CANTalon(3);
-	public static Encoder  leftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
-	public static Encoder  rightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-	public static final double encP = 0.1;
-	public static final double encI = 0;
-	public static final double encD = 0.001;
+	public static Encoder  rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+	public static Encoder  leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	public static /*final*/ double encP = 0.006;
+	public static /*final*/ double encI = 0;
+	public static /*final*/ double encD = 0.003;
 }

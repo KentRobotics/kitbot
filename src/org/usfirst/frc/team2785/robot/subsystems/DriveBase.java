@@ -13,17 +13,18 @@ import org.usfirst.frc.team2785.robot.commands.TeleopDrive;;
  */
 public class DriveBase extends Subsystem {
 	
-	public static Encoder leftEncoder;
-	public static Encoder rightEncoder;
+	private static Encoder leftEncoder;
+	private static Encoder rightEncoder;
 	private static DummyOutput leftOutput;
 	private static DummyOutput rightOutput;
-	public static RobotDrive drive;
-    public static PIDController leftPID;
-    public static PIDController rightPID;
-   
+	private static RobotDrive drive;
+    private static PIDController leftPID;
+    private static PIDController rightPID;
+    private static final double tolDist = 5;
 	
 	public DriveBase() {
 		leftEncoder = RobotMap.leftEncoder;
+		rightEncoder = RobotMap.rightEncoder;
 		leftOutput = new DummyOutput();
 		rightOutput = new DummyOutput();
 		drive = new RobotDrive(RobotMap.leftFrontTalon, RobotMap.leftBackTalon, RobotMap.rightFrontTalon, RobotMap.rightBackTalon);
@@ -37,11 +38,10 @@ public class DriveBase extends Subsystem {
 		leftEncoder.setDistancePerPulse(360/250);
 		rightEncoder.setDistancePerPulse(360/250);
 		leftPID.setContinuous();
-		leftPID.setAbsoluteTolerance(10);
 		rightPID.setContinuous();
-		rightPID.setAbsoluteTolerance(10);
-		SmartDashboard.putData("rightPID", rightPID);
-		SmartDashboard.putData("leftPID", leftPID);
+		SmartDashboard.putNumber("encP", RobotMap.encP);
+		SmartDashboard.putNumber("encI", RobotMap.encI);
+		SmartDashboard.putNumber("encD", RobotMap.encD);
 		resetSensors();
 	}
 	public void resetSensors() {
@@ -57,19 +57,26 @@ public class DriveBase extends Subsystem {
     	drive.setSafetyEnabled(true);
     }
     public void driveV(double mag, double turn) {
-    	
+    	drive.arcadeDrive(mag, turn, false);
     }
     public void setDriveTarget(double left, double right) {
     	resetSensors();
+    	leftPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"), SmartDashboard.getNumber("encD"));
+    	rightPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"), SmartDashboard.getNumber("encD"));
     	leftPID.enable();
     	rightPID.enable();
     	leftPID.setSetpoint(left);
     	rightPID.setSetpoint(right);
     }
-    public boolean drivePID() {
+    public boolean drivePID(double leftP, double rightP) {
     	// assumes setDriveTarget done
-    	drive.tankDrive(leftPID.get(), rightPID.get());
-    	return leftPID.onTarget() && rightPID.onTarget();
+    	drive.tankDrive(-leftPID.get() * leftP, -rightPID.get() * rightP, false);
+    	double left_reading = leftEncoder.getDistance();
+    	double right_reading = rightEncoder.getDistance();
+    	double left_target = leftPID.getSetpoint();
+    	double right_target = rightPID.getSetpoint();
+    	return (left_reading >= (left_target - tolDist) && left_reading <= (left_target + tolDist)) &&
+    		   (right_reading >= (right_target - tolDist) && right_reading <= (right_target + tolDist));
     }
     public void stopPID() {
     	leftPID.disable();

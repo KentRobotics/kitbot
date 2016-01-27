@@ -25,7 +25,8 @@ public class TeleopDrive extends Command {
     	if (Robot.oi.stick.getTrigger()) {
     		Robot.drivebase.resetSensors();
     	}
-    	Robot.drivebase.driveV(Robot.oi.stick.getY(), -Robot.oi.stick.getX());
+    	double mult = (-Robot.oi.stick.getZ() + 1) / 4 + 0.5;
+    	Robot.drivebase.driveV(Robot.oi.stick.getY() * mult, -Robot.oi.stick.getX() * mult);
     	Robot.drivebase.pushData();
     }
 

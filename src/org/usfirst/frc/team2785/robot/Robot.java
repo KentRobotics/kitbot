@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriveBase drivebase;
-
+	public static CameraMount cameramount;
     Command autonomousCommand;
     Command teleopCommand;
     SendableChooser chooser;
@@ -36,8 +36,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		drivebase = new DriveBase();
+		cameramount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical);
         chooser = new SendableChooser();
-        chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, 8));
+        chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, RobotMap.wheelDiameter));
         chooser.addObject("do a 180", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);

@@ -51,7 +51,8 @@ public class DriveDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	SmartDashboard.putBoolean("driving", false);
+    	// for debugging purposes
+    	//SmartDashboard.putBoolean("driving", false);
     	drive.stopPID();
     }
 

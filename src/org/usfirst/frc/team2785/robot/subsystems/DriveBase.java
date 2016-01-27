@@ -39,9 +39,9 @@ public class DriveBase extends Subsystem {
 		rightEncoder.setDistancePerPulse(360/250);
 		leftPID.setContinuous();
 		rightPID.setContinuous();
-		SmartDashboard.putNumber("encP", RobotMap.encP);
+		/*SmartDashboard.putNumber("encP", RobotMap.encP);
 		SmartDashboard.putNumber("encI", RobotMap.encI);
-		SmartDashboard.putNumber("encD", RobotMap.encD);
+		SmartDashboard.putNumber("encD", RobotMap.encD);*/ // for tuning purposes
 		resetSensors();
 	}
 	public void resetSensors() {
@@ -61,8 +61,8 @@ public class DriveBase extends Subsystem {
     }
     public void setDriveTarget(double left, double right) {
     	resetSensors();
-    	leftPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"), SmartDashboard.getNumber("encD"));
-    	rightPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"), SmartDashboard.getNumber("encD"));
+    	//leftPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"), SmartDashboard.getNumber("encD"));
+    	//rightPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"), SmartDashboard.getNumber("encD"));
     	leftPID.enable();
     	rightPID.enable();
     	leftPID.setSetpoint(left);

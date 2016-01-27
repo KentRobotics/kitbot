@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2785.robot;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.AnalogGyro;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -23,7 +22,11 @@ public class RobotMap {
 	public static CANTalon rightBackTalon = new CANTalon(3);
 	public static Encoder  rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 	public static Encoder  leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-	public static /*final*/ double encP = 0.006;
-	public static /*final*/ double encI = 0;
-	public static /*final*/ double encD = 0.003;
+	public static Servo cameraVertical = new Servo(1);
+	public static Servo cameraHorizontal = new Servo(0);
+	
+	public static final double wheelDiameter = 8; //inches
+	public static final double encP = 0.006;
+	public static final double encI = 0;
+	public static final double encD = 0.003;
 }

@@ -8,27 +8,21 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TeleopDrive extends Command {
+public class TeleopCamera extends Command {
 
-    public TeleopDrive() {
+    public TeleopCamera() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivebase);
+    	requires(Robot.cameramount);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (OI.stick.getTrigger()) {
-    		Robot.drivebase.resetSensors();
-    	}
-    	double mult = (-OI.stick.getZ() + 1) / 4 + 0.5; //50% at lowest point, 100% at highest
-    	Robot.drivebase.driveV(OI.stick.getY() * mult, -OI.stick.getX() * mult);
-    	Robot.drivebase.pushData();
+    	Robot.cameramount.moveCamera(-OI.camerastick.getY(), OI.camerastick.getX());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,12 +32,10 @@ public class TeleopDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

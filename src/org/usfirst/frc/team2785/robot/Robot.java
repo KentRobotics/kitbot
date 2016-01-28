@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.ExampleCommand;
@@ -36,7 +37,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		drivebase = new DriveBase();
-		cameramount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical);
+		cameramount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical, RobotMap.camera);
         chooser = new SendableChooser();
         chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, RobotMap.wheelDiameter));
         chooser.addObject("do a 180", new ExampleCommand());

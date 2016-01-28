@@ -18,11 +18,14 @@ public class TeleopCamera extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.cameramount.resetPosition();
+    	Robot.cameramount.startServer();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cameramount.moveCamera(-OI.camerastick.getY(), OI.camerastick.getX());
+    	Robot.cameramount.pushData();
+    	Robot.cameramount.moveCamera(OI.camerastick.getX(), OI.camerastick.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,10 +35,12 @@ public class TeleopCamera extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.cameramount.stopServer();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

@@ -15,21 +15,26 @@ public class DriveBase extends Subsystem {
 	
 	private static Encoder leftEncoder;
 	private static Encoder rightEncoder;
+	private static AnalogGyro gyro;
 	private static DummyOutput leftOutput;
 	private static DummyOutput rightOutput;
+	private static DummyOutput gyroOutput;
 	private static RobotDrive drive;
     private static PIDController leftPID;
     private static PIDController rightPID;
-    private static final double tolDist = 5;
+    private static PIDController gyroPID;
 	
 	public DriveBase() {
 		leftEncoder = RobotMap.leftEncoder;
 		rightEncoder = RobotMap.rightEncoder;
+		gyro = RobotMap.gyro;
 		leftOutput = new DummyOutput();
 		rightOutput = new DummyOutput();
+		gyroOutput = new DummyOutput();
 		drive = new RobotDrive(RobotMap.leftFrontTalon, RobotMap.leftBackTalon, RobotMap.rightFrontTalon, RobotMap.rightBackTalon);
 	    rightPID = new PIDController(RobotMap.encP, RobotMap.encI, RobotMap.encD, rightEncoder, leftOutput);
 	    leftPID = new PIDController(RobotMap.encP, RobotMap.encI, RobotMap.encD, leftEncoder, rightOutput);
+	    gyroPID = new PIDController(RobotMap.gyrP, RobotMap.gyrI, RobotMap.gyrD, gyro, gyroOutput);
 	    setup();
 	}
     // Put methods for controlling this subsystem
@@ -47,6 +52,7 @@ public class DriveBase extends Subsystem {
 	public void resetSensors() {
 		rightEncoder.reset();
 		leftEncoder.reset();
+		gyro.reset();
 	}
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -68,23 +74,36 @@ public class DriveBase extends Subsystem {
     	leftPID.setSetpoint(left);
     	rightPID.setSetpoint(right);
     }
-    public boolean drivePID(double leftP, double rightP) {
+    public void setTurnTarget(double angle) {
+    	resetSensors();
+    	gyroPID.enable();
+    	gyroPID.setSetpoint(angle);
+    }
+    public boolean drivePID(double leftMagnitude, double rightMagnitude) {
     	// assumes setDriveTarget done
-    	drive.tankDrive(-leftPID.get() * leftP, -rightPID.get() * rightP, false);
+    	drive.tankDrive(-leftPID.get() * leftMagnitude, -rightPID.get() * rightMagnitude, false);
     	double left_reading = leftEncoder.getDistance();
     	double right_reading = rightEncoder.getDistance();
     	double left_target = leftPID.getSetpoint();
     	double right_target = rightPID.getSetpoint();
-    	return (left_reading >= (left_target - tolDist) && left_reading <= (left_target + tolDist)) &&
-    		   (right_reading >= (right_target - tolDist) && right_reading <= (right_target + tolDist));
+    	return (left_reading >= (left_target - RobotMap.encoderTolerance) && left_reading <= (left_target + RobotMap.encoderTolerance)) &&
+    		   (right_reading >= (right_target - RobotMap.encoderTolerance) && right_reading <= (right_target + RobotMap.encoderTolerance));
+    }
+    public boolean turnPID(double speed) {
+    	double gyroAngle = gyro.getAngle();
+    	double gyroSetpoint = gyroPID.getSetpoint();
+    	drive.arcadeDrive(gyroPID.get() * speed, (gyroAngle > gyroSetpoint) ? -1 : 1);
+    	return (gyroAngle >= (gyroSetpoint - RobotMap.gyroTolerance) && gyroAngle <= (gyroSetpoint + RobotMap.gyroTolerance));
     }
     public void stopPID() {
     	leftPID.disable();
     	rightPID.disable();
+    	gyroPID.disable();
     }
     public void pushData() {
     	SmartDashboard.putNumber("leftEncoder", leftEncoder.getDistance());
     	SmartDashboard.putNumber("rightEncoder", rightEncoder.getDistance());
+    	SmartDashboard.putNumber("gyro", gyro.getAngle());
     }
 }
 

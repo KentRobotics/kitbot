@@ -23,6 +23,7 @@ public class RobotMap {
 	public static CANTalon rightBackTalon = new CANTalon(3);
 	public static Encoder  rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 	public static Encoder  leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	public static AnalogGyro gyro = new AnalogGyro(1);
 	public static Servo cameraVertical = new Servo(1);
 	public static Servo cameraHorizontal = new Servo(0);
 	public static USBCamera camera = new USBCamera("cam0");
@@ -31,5 +32,11 @@ public class RobotMap {
 	public static final double encP = 0.006;
 	public static final double encI = 0;
 	public static final double encD = 0.003;
+	public static final double gyrP = 0.006;
+	public static final double gyrI = 0;
+	public static final double gyrD = 0.003;
+	public static final double encoderTolerance = 5;
+	public static final double gyroTolerance = 2;
 	public static final int cameraQuality = 50;
+	
 }

@@ -44,8 +44,8 @@ public class CameraMount extends Subsystem {
     	SmartDashboard.putNumber("choriz", horizontalServo.getAngle());
     }
     public void resetPosition() {
-    	verticalServo.setAngle(32);
-    	horizontalServo.setAngle(100);
+    	verticalServo.setAngle(100);
+    	horizontalServo.setAngle(32);
     }
     public void moveCamera(double vertical, double horizontal) {
     	//TODO: fix, duh

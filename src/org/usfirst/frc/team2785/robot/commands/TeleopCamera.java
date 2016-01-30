@@ -26,6 +26,9 @@ public class TeleopCamera extends Command {
     protected void execute() {
     	Robot.cameramount.pushData();
     	Robot.cameramount.moveCamera(OI.camerastick.getX(), -OI.camerastick.getY());
+    	if (OI.camerastick.getTrigger()) {
+    		Robot.cameramount.resetPosition();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

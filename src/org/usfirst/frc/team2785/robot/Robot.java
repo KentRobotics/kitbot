@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivebase = new DriveBase();
 		cameramount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical, RobotMap.camera);
-		marvinarm = new MarvinArm();
+		//marvinarm = new MarvinArm();
         chooser = new SendableChooser();
         chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, RobotMap.wheelDiameter));
         chooser.addObject("do a 180", new Turn(180, 0.5));

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.vision.USBCamera;
 
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2785.robot.commands.Turn;
 import org.usfirst.frc.team2785.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveBase drivebase;
 	public static CameraMount cameramount;
+	public static MarvinArm marvinarm;
     Command autonomousCommand;
     Command teleopCommand;
     SendableChooser chooser;
@@ -38,9 +40,10 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivebase = new DriveBase();
 		cameramount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical, RobotMap.camera);
+		marvinarm = new MarvinArm();
         chooser = new SendableChooser();
         chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, RobotMap.wheelDiameter));
-        chooser.addObject("do a 180", new ExampleCommand());
+        chooser.addObject("do a 180", new Turn(180, 0.5));
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }

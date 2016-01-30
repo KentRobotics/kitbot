@@ -17,10 +17,11 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	public static CANTalon leftFrontTalon = new CANTalon(0);
-	public static CANTalon leftBackTalon = new CANTalon(1);
-	public static CANTalon rightFrontTalon = new CANTalon(2);
-	public static CANTalon rightBackTalon = new CANTalon(3);
+	public static CANTalon leftFrontTalon = new CANTalon(1);
+	public static CANTalon leftBackTalon = new CANTalon(2);
+	public static CANTalon rightFrontTalon = new CANTalon(3);
+	public static CANTalon rightBackTalon = new CANTalon(4);
+	public static CANTalon marvinTalon = new CANTalon(5);
 	public static Encoder  rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 	public static Encoder  leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	public static AnalogGyro gyro = new AnalogGyro(1);

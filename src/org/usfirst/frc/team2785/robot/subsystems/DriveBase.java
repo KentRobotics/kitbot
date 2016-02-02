@@ -86,6 +86,8 @@ public class DriveBase extends Subsystem {
     	double right_reading = rightEncoder.getDistance();
     	double left_target = leftPID.getSetpoint();
     	double right_target = rightPID.getSetpoint();
+    	SmartDashboard.putNumber("leftPID target", left_target);
+    	SmartDashboard.putNumber("rightPID target", right_target);
     	return (left_reading >= (left_target - RobotMap.encoderTolerance) && left_reading <= (left_target + RobotMap.encoderTolerance)) &&
     		   (right_reading >= (right_target - RobotMap.encoderTolerance) && right_reading <= (right_target + RobotMap.encoderTolerance));
     }

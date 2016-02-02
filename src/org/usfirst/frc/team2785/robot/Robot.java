@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 		//marvinarm = new MarvinArm();
         chooser = new SendableChooser();
         chooser.addDefault("drive forward", new DriveDistance(36, 36, 0.5, 0.5, RobotMap.wheelDiameter));
-        chooser.addObject("do a 180", new Turn(180, 0.5));
+        chooser.addObject("do a 180", new Turn(180, 0.75));
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
     }

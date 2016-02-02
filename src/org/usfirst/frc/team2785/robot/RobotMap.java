@@ -33,7 +33,7 @@ public class RobotMap {
 	public static final double encP = 0.006;
 	public static final double encI = 0;
 	public static final double encD = 0.003;
-	public static final double gyrP = 0.006;
+	public static final double gyrP = 0.007;
 	public static final double gyrI = 0;
 	public static final double gyrD = 0.003;
 	public static final double encoderTolerance = 5;

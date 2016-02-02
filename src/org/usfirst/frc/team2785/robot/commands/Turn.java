@@ -27,6 +27,7 @@ public class Turn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	done = Robot.drivebase.turnPID(_speed); 
+    	Robot.drivebase.pushData();
     } // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return done;

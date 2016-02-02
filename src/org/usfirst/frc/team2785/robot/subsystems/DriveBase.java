@@ -92,7 +92,11 @@ public class DriveBase extends Subsystem {
     public boolean turnPID(double speed) {
     	double gyroAngle = gyro.getAngle();
     	double gyroSetpoint = gyroPID.getSetpoint();
-    	drive.arcadeDrive(gyroPID.get() * speed, (gyroAngle > gyroSetpoint) ? -1 : 1);
+    	//turning is reversed
+    	drive.drive(gyroPID.get() * speed, (gyroAngle > gyroSetpoint) ? -1 : 1);
+    	//gyroAngle = gyroAngle % 360; // hack for error checking
+    	SmartDashboard.putNumber("gyroPID setpoint", gyroSetpoint);
+    	SmartDashboard.putNumber("gyroPID value", gyroPID.get());
     	return (gyroAngle >= (gyroSetpoint - RobotMap.gyroTolerance) && gyroAngle <= (gyroSetpoint + RobotMap.gyroTolerance));
     }
     public void stopPID() {

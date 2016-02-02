@@ -45,7 +45,7 @@ public class CameraMount extends Subsystem {
     }
     public void resetPosition() {
     	verticalServo.setAngle(100);
-    	horizontalServo.setAngle(32);
+    	horizontalServo.setAngle(150);
     }
     public void moveCamera(double vertical, double horizontal) {
     	//TODO: fix, duh

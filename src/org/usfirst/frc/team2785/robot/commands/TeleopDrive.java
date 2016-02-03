@@ -13,7 +13,7 @@ public class TeleopDrive extends Command {
     public TeleopDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivebase);
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -24,11 +24,11 @@ public class TeleopDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (OI.stick.getTrigger()) {
-    		Robot.drivebase.resetSensors();
+    		Robot.driveBase.resetSensors();
     	}
     	double mult = (-OI.stick.getZ() + 1) / 4 + 0.5; //50% at lowest point, 100% at highest
-    	Robot.drivebase.driveV(OI.stick.getY() * mult, -OI.stick.getX() * mult);
-    	Robot.drivebase.pushData();
+    	Robot.driveBase.driveV(OI.stick.getY() * mult, -OI.stick.getX() * mult);
+    	Robot.driveBase.pushData();
     }
 
     // Make this return true when this Command no longer needs to run execute()

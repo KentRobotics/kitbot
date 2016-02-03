@@ -13,7 +13,7 @@ public class TeleopMarvinArm extends Command {
     public TeleopMarvinArm() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.marvinarm);
+    	requires(Robot.marvinArm);
     }
 
     // Called just before this Command runs the first time
@@ -23,11 +23,11 @@ public class TeleopMarvinArm extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (OI.stick.getRawButton(6)) {
-    		Robot.marvinarm.set((OI.camerastick.getZ() + 1)/2);
+    		Robot.marvinArm.set((OI.camerastick.getZ() + 1)/2);
     	} else if (OI.stick.getRawButton(7)) {
-    		Robot.marvinarm.set(-(OI.camerastick.getZ() + 1)/2);
+    		Robot.marvinArm.set(-(OI.camerastick.getZ() + 1)/2);
     	} else {
-    		Robot.marvinarm.set(0);
+    		Robot.marvinArm.set(0);
     	}
     }
 
@@ -38,7 +38,7 @@ public class TeleopMarvinArm extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.marvinarm.set(0);
+    	Robot.marvinArm.set(0);
     }
 
     // Called when another command which requires one or more of the same

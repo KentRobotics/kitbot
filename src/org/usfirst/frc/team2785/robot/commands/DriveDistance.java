@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2785.robot.commands;
 
 import org.usfirst.frc.team2785.robot.Robot;
+import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.subsystems.DriveBase;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,28 +12,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveDistance extends Command {
 
-	private static DriveBase drive;
-	private double left;
-	private double right;
-	private double leftp;
-	private double rightp;
-	private double diam;
+	private DriveBase drive;
+	private double leftDistance;
+	private double rightDistance;
+	private double leftMaxPower;
+	private double rightMaxPower;
+	private double diameter;
 	private boolean finished = false;
 	private boolean _debug = false;
-    public DriveDistance(double dLeft, double dRight, double pLeft, double pRight, double diameter) {
+    public DriveDistance(double leftDistance, double rightDistance, double leftMaxPower, double rightMaxPower, double diameter) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
-    	requires(Robot.drivebase);
-    	drive = Robot.drivebase;
-    	left = dLeft;
-    	right = dRight;
-    	leftp = pLeft;
-    	rightp = pRight;
-    	diam = diameter;
+    	requires(Robot.driveBase);
+    	this.drive = Robot.driveBase;
+    	this.leftDistance = leftDistance;
+    	this.rightDistance = rightDistance;
+    	this.leftMaxPower = leftMaxPower;
+    	this.rightMaxPower = rightMaxPower;
+    	this.diameter = diameter;
     }
-    public DriveDistance(double dLeft, double dRight) {
-    	this(dLeft, dRight, 0.5, 0.5, 360); 
+    public DriveDistance(double leftDistance, double rightDistance) {
+    	this(leftDistance, rightDistance, RobotMap.NORMAL_MOVE_SPEED, RobotMap.NORMAL_MOVE_SPEED, 360); 
     }
     public DriveDistance(boolean _debug) {
     	this(-1, -1, -1, -1, -1); //values will be overwritten anyway
@@ -47,21 +48,21 @@ public class DriveDistance extends Command {
     		double pLeft = SmartDashboard.getNumber("pLeft");
     		double pRight = SmartDashboard.getNumber("pRight");
     		double diameter = SmartDashboard.getNumber("diameter");
-    		left = dLeft;
-        	right = dRight;
-        	leftp = pLeft;
-        	rightp = pRight;
-        	diam = diameter;
+    		this.leftDistance = dLeft;
+        	this.rightDistance = dRight;
+        	this.leftMaxPower = pLeft;
+        	this.rightMaxPower = pRight;
+        	this.diameter = diameter;
     	}
-    	drive.setupEncoderDistance(diam);
-    	drive.setDriveTarget(left, right);
+    	drive.setupEncoderDistance(diameter);
+    	drive.setDriveTarget(leftDistance, rightDistance);
     	SmartDashboard.putBoolean("driving", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	drive.pushData();
-    	finished = drive.drivePID(leftp, rightp);
+    	finished = drive.drivePID(leftMaxPower, rightMaxPower);
     }
 
     // Make this return true when this Command no longer needs to run execute()

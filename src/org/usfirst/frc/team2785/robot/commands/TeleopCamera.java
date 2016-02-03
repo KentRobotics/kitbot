@@ -13,21 +13,21 @@ public class TeleopCamera extends Command {
     public TeleopCamera() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.cameramount);
+    	requires(Robot.cameraMount);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cameramount.resetPosition();
-    	Robot.cameramount.startServer();
+    	Robot.cameraMount.resetPosition();
+    	Robot.cameraMount.startServer();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cameramount.pushData();
-    	Robot.cameramount.moveCamera(OI.camerastick.getX(), -OI.camerastick.getY());
+    	Robot.cameraMount.pushData();
+    	Robot.cameraMount.moveCamera(OI.camerastick.getX(), -OI.camerastick.getY());
     	if (OI.camerastick.getTrigger()) {
-    		Robot.cameramount.resetPosition();
+    		Robot.cameraMount.resetPosition();
     	}
     }
 
@@ -38,7 +38,7 @@ public class TeleopCamera extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cameramount.stopServer();
+    	Robot.cameraMount.stopServer();
     }
 
     // Called when another command which requires one or more of the same

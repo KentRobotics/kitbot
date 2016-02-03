@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.vision.USBCamera;
 
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.ExampleCommand;
@@ -25,9 +24,9 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static DriveBase drivebase;
-	public static CameraMount cameramount;
-	public static MarvinArm marvinarm;
+	public static DriveBase driveBase;
+	public static CameraMount cameraMount;
+	public static MarvinArm marvinArm;
     Command autonomousCommand;
     Command teleopCommand;
     SendableChooser chooser;
@@ -38,11 +37,11 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-		drivebase = new DriveBase();
-		cameramount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical, RobotMap.camera);
+		driveBase = new DriveBase();
+		cameraMount = new CameraMount(RobotMap.cameraHorizontal, RobotMap.cameraVertical, RobotMap.camera);
 		//marvinarm = new MarvinArm();
         chooser = new SendableChooser();
-        chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5, RobotMap.wheelDiameter));
+        chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5, RobotMap.WHEEL_DIAMETER));
         chooser.addObject("do a 180", new Turn(180, 0.75));
         chooser.addObject("debug mode", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());

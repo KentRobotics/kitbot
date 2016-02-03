@@ -24,7 +24,7 @@ public class CameraMount extends Subsystem {
 		horizontalServo = horizontal;
 		verticalServo = vertical;
 		camera = cam;
-		speed = RobotMap.cameraMountSpeed;
+		speed = RobotMap.CAMERA_MOUNT_SPEED;
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -33,7 +33,7 @@ public class CameraMount extends Subsystem {
     }
     public void startServer() {
     	CameraServer server = CameraServer.getInstance();
-    	server.setQuality(RobotMap.cameraQuality);
+    	server.setQuality(RobotMap.CAMERA_QUALITY);
     	server.startAutomaticCapture(camera);
     }
     public void stopServer() {

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2785.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.*;
 
@@ -32,9 +31,9 @@ public class DriveBase extends Subsystem {
 		rightOutput = new DummyOutput();
 		gyroOutput = new DummyOutput();
 		drive = new RobotDrive(RobotMap.leftFrontTalon, RobotMap.leftBackTalon, RobotMap.rightFrontTalon, RobotMap.rightBackTalon);
-	    rightPID = new PIDController(RobotMap.encP, RobotMap.encI, RobotMap.encD, rightEncoder, leftOutput);
-	    leftPID = new PIDController(RobotMap.encP, RobotMap.encI, RobotMap.encD, leftEncoder, rightOutput);
-	    gyroPID = new PIDController(RobotMap.gyrP, RobotMap.gyrI, RobotMap.gyrD, gyro, gyroOutput);
+	    rightPID = new PIDController(RobotMap.ENCODER_P, RobotMap.ENCODER_I, RobotMap.ENCODER_D, rightEncoder, leftOutput);
+	    leftPID = new PIDController(RobotMap.ENCODER_P, RobotMap.ENCODER_I, RobotMap.ENCODER_D, leftEncoder, rightOutput);
+	    gyroPID = new PIDController(RobotMap.GYRO_P, RobotMap.GYRO_I, RobotMap.GYRO_D, gyro, gyroOutput);
 	    setup();
 	}
     // Put methods for controlling this subsystem
@@ -52,12 +51,12 @@ public class DriveBase extends Subsystem {
 		gyro.reset();
 	}
 	public void setupEncoderDistance(double wheel_diameter) {
-		leftEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.encoderTicksPerRotation);
-		rightEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.encoderTicksPerRotation);
+		leftEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.ENCODER_TICKS_PER_ROTATION);
+		rightEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.ENCODER_TICKS_PER_ROTATION);
 	}
 	public void resetEncoderDistance() {
-		leftEncoder.setDistancePerPulse(360 / RobotMap.encoderTicksPerRotation);
-		rightEncoder.setDistancePerPulse(360 / RobotMap.encoderTicksPerRotation);
+		leftEncoder.setDistancePerPulse(360 / RobotMap.ENCODER_TICKS_PER_ROTATION);
+		rightEncoder.setDistancePerPulse(360 / RobotMap.ENCODER_TICKS_PER_ROTATION);
 	}
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -93,8 +92,8 @@ public class DriveBase extends Subsystem {
     	double right_target = rightPID.getSetpoint();
     	SmartDashboard.putNumber("leftPID target", left_target);
     	SmartDashboard.putNumber("rightPID target", right_target);
-    	return (left_reading >= (left_target - RobotMap.encoderTolerance) && left_reading <= (left_target + RobotMap.encoderTolerance)) &&
-    		   (right_reading >= (right_target - RobotMap.encoderTolerance) && right_reading <= (right_target + RobotMap.encoderTolerance));
+    	return (left_reading >= (left_target - RobotMap.ENCODER_TOLERANCE) && left_reading <= (left_target + RobotMap.ENCODER_TOLERANCE)) &&
+    		   (right_reading >= (right_target - RobotMap.ENCODER_TOLERANCE) && right_reading <= (right_target + RobotMap.ENCODER_TOLERANCE));
     }
     public boolean turnPID(double max_speed) {
     	double gyroAngle = gyro.getAngle();
@@ -104,7 +103,7 @@ public class DriveBase extends Subsystem {
     	//gyroAngle = gyroAngle % 360; // hack for error checking
     	SmartDashboard.putNumber("gyroPID setpoint", gyroSetpoint);
     	SmartDashboard.putNumber("gyroPID value", gyroPID.get());
-    	return (gyroAngle >= (gyroSetpoint - RobotMap.gyroTolerance) && gyroAngle <= (gyroSetpoint + RobotMap.gyroTolerance));
+    	return (gyroAngle >= (gyroSetpoint - RobotMap.GYRO_TOLERANCE) && gyroAngle <= (gyroSetpoint + RobotMap.GYRO_TOLERANCE));
     }
     public void stopPID() {
     	leftPID.reset();
@@ -119,12 +118,12 @@ public class DriveBase extends Subsystem {
     }
     private void debugInitPID() {
     	//also for pid tuning
-    	SmartDashboard.putNumber("encP", RobotMap.encP);
-    	SmartDashboard.putNumber("encI", RobotMap.encI);
-    	SmartDashboard.putNumber("encD", RobotMap.encD);
-    	SmartDashboard.putNumber("gyrP", RobotMap.gyrP);
-    	SmartDashboard.putNumber("gyrI", RobotMap.gyrI);
-    	SmartDashboard.putNumber("gyrD", RobotMap.gyrD);
+    	SmartDashboard.putNumber("encP", RobotMap.ENCODER_P);
+    	SmartDashboard.putNumber("encI", RobotMap.ENCODER_I);
+    	SmartDashboard.putNumber("encD", RobotMap.ENCODER_D);
+    	SmartDashboard.putNumber("gyrP", RobotMap.GYRO_P);
+    	SmartDashboard.putNumber("gyrI", RobotMap.GYRO_I);
+    	SmartDashboard.putNumber("gyrD", RobotMap.GYRO_D);
     	SmartDashboard.putNumber("dLeft", 36);
     	SmartDashboard.putNumber("dRight", 36);
     	SmartDashboard.putNumber("pLeft", 0.5);

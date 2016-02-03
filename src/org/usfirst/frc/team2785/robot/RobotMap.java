@@ -29,19 +29,19 @@ public class RobotMap {
 	public static Servo cameraHorizontal = new Servo(0);
 	public static USBCamera camera = new USBCamera("cam0");
 	
-	public static final double wheelDiameter = 8; //inches
-	public static final double encP = 0.05;
-	public static final double encI = 0;
-	public static final double encD = 0.003;
-	public static final double gyrP = 0.007;
-	public static final double gyrI = 0;
-	public static final double gyrD = 0.005; //best for turning 90 degrees
-	public static final double encoderTicksPerRotation = 250; //for standard encoders
-	public static final double encoderTolerance = 5;
-	public static final double gyroTolerance = 3;
-	public static final int cameraQuality = 50;
-	public static final double cameraMountSpeed = 4.0;
-	public static final double normalTurnSpeed = 0.6;
-	public static final double normalMoveSpeed = 0.5;
+	public static final double WHEEL_DIAMETER = 8; //inches
+	public static final double ENCODER_P = 0.05;
+	public static final double ENCODER_I = 0;
+	public static final double ENCODER_D = 0.003;
+	public static final double GYRO_P = 0.007;
+	public static final double GYRO_I = 0;
+	public static final double GYRO_D = 0.005; //best for turning 90 degrees
+	public static final double ENCODER_TICKS_PER_ROTATION = 250; //for standard encoders
+	public static final double ENCODER_TOLERANCE = 5;
+	public static final double GYRO_TOLERANCE = 3;
+	public static final int CAMERA_QUALITY = 50;
+	public static final double CAMERA_MOUNT_SPEED = 4.0;
+	public static final double NORMAL_TURN_SPEED = 0.6;
+	public static final double NORMAL_MOVE_SPEED = 0.5;
 	
 }

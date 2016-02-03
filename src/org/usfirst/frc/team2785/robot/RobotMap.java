@@ -30,14 +30,14 @@ public class RobotMap {
 	public static USBCamera camera = new USBCamera("cam0");
 	
 	public static final double wheelDiameter = 8; //inches
-	public static final double encP = 0.006;
+	public static final double encP = 0.05;
 	public static final double encI = 0;
 	public static final double encD = 0.003;
 	public static final double gyrP = 0.007;
 	public static final double gyrI = 0;
-	public static final double gyrD = 0.003;
+	public static final double gyrD = 0.005; //best for turning 90 degrees
 	public static final double encoderTolerance = 5;
-	public static final double gyroTolerance = 2;
+	public static final double gyroTolerance = 3;
 	public static final int cameraQuality = 50;
 	
 }

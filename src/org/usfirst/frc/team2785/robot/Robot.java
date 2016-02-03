@@ -44,8 +44,12 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5, RobotMap.wheelDiameter));
         chooser.addObject("do a 180", new Turn(180, 0.75));
+        chooser.addObject("debug mode", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        SmartDashboard.putData("Debug DriveDistance", new DriveDistance(true));
+        SmartDashboard.putData("Debug Turn", new Turn(true));
+        
     }
 	
 	/**

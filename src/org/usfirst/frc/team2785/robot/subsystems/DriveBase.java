@@ -52,12 +52,12 @@ public class DriveBase extends Subsystem {
 		gyro.reset();
 	}
 	public void setupEncoderDistance(double wheel_diameter) {
-		leftEncoder.setDistancePerPulse(Math.PI * wheel_diameter / 250);
-		rightEncoder.setDistancePerPulse(Math.PI * wheel_diameter / 250);
+		leftEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.encoderTicksPerRotation);
+		rightEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.encoderTicksPerRotation);
 	}
 	public void resetEncoderDistance() {
-		leftEncoder.setDistancePerPulse(360/250);
-		rightEncoder.setDistancePerPulse(360/250);
+		leftEncoder.setDistancePerPulse(360 / RobotMap.encoderTicksPerRotation);
+		rightEncoder.setDistancePerPulse(360 / RobotMap.encoderTicksPerRotation);
 	}
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -125,8 +125,8 @@ public class DriveBase extends Subsystem {
     	SmartDashboard.putNumber("gyrP", RobotMap.gyrP);
     	SmartDashboard.putNumber("gyrI", RobotMap.gyrI);
     	SmartDashboard.putNumber("gyrD", RobotMap.gyrD);
-    	SmartDashboard.putNumber("dLeft", 5);
-    	SmartDashboard.putNumber("dRight", 5);
+    	SmartDashboard.putNumber("dLeft", 36);
+    	SmartDashboard.putNumber("dRight", 36);
     	SmartDashboard.putNumber("pLeft", 0.5);
     	SmartDashboard.putNumber("pRight", 0.5);
     	SmartDashboard.putNumber("diameter", 8);

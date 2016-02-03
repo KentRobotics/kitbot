@@ -19,11 +19,12 @@ public class CameraMount extends Subsystem {
 	private static Servo horizontalServo;
 	private static Servo verticalServo;
 	private static USBCamera camera;
-	private static final double speed = 4.0d; // 1 deg / 20 milliseconds
+	private double speed;
 	public CameraMount(Servo vertical, Servo horizontal, USBCamera cam) {
 		horizontalServo = horizontal;
 		verticalServo = vertical;
 		camera = cam;
+		speed = RobotMap.cameraMountSpeed;
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

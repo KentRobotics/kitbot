@@ -36,8 +36,12 @@ public class RobotMap {
 	public static final double gyrP = 0.007;
 	public static final double gyrI = 0;
 	public static final double gyrD = 0.005; //best for turning 90 degrees
+	public static final double encoderTicksPerRotation = 250; //for standard encoders
 	public static final double encoderTolerance = 5;
 	public static final double gyroTolerance = 3;
 	public static final int cameraQuality = 50;
+	public static final double cameraMountSpeed = 4.0;
+	public static final double normalTurnSpeed = 0.6;
+	public static final double normalMoveSpeed = 0.5;
 	
 }

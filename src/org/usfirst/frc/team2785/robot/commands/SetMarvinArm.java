@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2785.robot.commands;
 
-import org.usfirst.frc.team2785.robot.OI;
 import org.usfirst.frc.team2785.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,43 +7,35 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TeleopMarvinArm extends Command {
-
-    public TeleopMarvinArm() {
+public class SetMarvinArm extends Command {
+	private double target;
+    public SetMarvinArm(double angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.marvinArm);
+    	target = angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.marvinArm.setTeleop();
+    	Robot.marvinArm.setAngle(target);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (OI.stick.getRawButton(6)) {
-    		Robot.marvinArm.set((OI.camerastick.getZ() + 1)/2);
-    	} else if (OI.stick.getRawButton(7)) {
-    		Robot.marvinArm.set(-(OI.camerastick.getZ() + 1)/2);
-    	} else {
-    		Robot.marvinArm.set(0);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.marvinArm.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.marvinArm.set(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

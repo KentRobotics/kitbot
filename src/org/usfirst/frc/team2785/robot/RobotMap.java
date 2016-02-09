@@ -25,6 +25,7 @@ public class RobotMap {
 	public static Encoder  rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
 	public static Encoder  leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	public static AnalogGyro gyro = new AnalogGyro(1);
+	public static AnalogGyro armGyro = new AnalogGyro(0);
 	public static Servo cameraVertical = new Servo(1);
 	public static Servo cameraHorizontal = new Servo(0);
 	public static USBCamera camera = new USBCamera("cam0");
@@ -36,6 +37,10 @@ public class RobotMap {
 	public static final double GYRO_P = 0.007;
 	public static final double GYRO_I = 0;
 	public static final double GYRO_D = 0.005; //best for turning 90 degrees
+	public static final double ARM_GYRO_P = 0.010;
+	public static final double ARM_GYRO_I = 0;
+	public static final double ARM_GYRO_D = 0.008; //best for turning 90 degrees
+	public static final double ARM_TOLERANCE = 1;
 	public static final double ENCODER_TICKS_PER_ROTATION = 250; //for standard encoders
 	public static final double ENCODER_TOLERANCE = 5;
 	public static final double GYRO_TOLERANCE = 3;

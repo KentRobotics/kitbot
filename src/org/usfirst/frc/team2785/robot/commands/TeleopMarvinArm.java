@@ -23,13 +23,18 @@ public class TeleopMarvinArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (OI.stick.getRawButton(6)) {
+    	/*if (OI.stick.getRawButton(6)) {
     		Robot.marvinArm.set((OI.camerastick.getZ() + 1)/2);
     	} else if (OI.stick.getRawButton(7)) {
     		Robot.marvinArm.set(-(OI.camerastick.getZ() + 1)/2);
     	} else {
     		Robot.marvinArm.set(0);
+    	}*/
+    	Robot.marvinArm.set(OI.camerastick.getY());
+    	if (OI.camerastick.getTrigger()) {
+    		Robot.marvinArm.resetSensors();
     	}
+    	Robot.marvinArm.pushData();
     }
 
     // Make this return true when this Command no longer needs to run execute()

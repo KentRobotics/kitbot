@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2785.robot.commands;
 
 import org.usfirst.frc.team2785.robot.Robot;
+import org.usfirst.frc.team2785.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,7 +37,8 @@ public class SetMarvinArm extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.marvinArm.onTarget();
+    	//plus because gyro output is negative
+        return Math.abs(Robot.marvinArm.getAngle() + target) < RobotMap.ARM_TOLERANCE;
     }
 
     // Called once after isFinished returns true

@@ -24,7 +24,6 @@ public class MarvinArm extends PIDSubsystem {
 		motor.enableBrakeMode(true);
 		gyro = RobotMap.armGyro;
 		gyro.reset();
-		getPIDController().setContinuous(false);
 		setAbsoluteTolerance(RobotMap.ARM_TOLERANCE);
 		SmartDashboard.putNumber("armTarget", 0);
 		pushData();
@@ -36,14 +35,16 @@ public class MarvinArm extends PIDSubsystem {
     }
     public void setAngle(double angle) {
     	enable();
-    	getPIDController().reset();
     	setSetpoint(angle);
+    }
+    public double getAngle() {
+    	return gyro.getAngle();
     }
     public void resetSensors() {
     	gyro.reset();
     }
     public void stopPID() {
-    	disable();
+    	getPIDController().reset();
     }
     protected boolean isDone() {
     	return onTarget();
@@ -62,7 +63,8 @@ public class MarvinArm extends PIDSubsystem {
 		return gyro.getAngle();
 	}
 	protected void usePIDOutput(double output) {
-		motor.pidWrite(output);
+    	SmartDashboard.putNumber("armPID", output);
+		motor.set(-output);
 	}
 }
 

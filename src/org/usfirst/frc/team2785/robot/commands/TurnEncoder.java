@@ -4,6 +4,7 @@ import org.usfirst.frc.team2785.robot.Robot;
 import org.usfirst.frc.team2785.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -12,7 +13,7 @@ public class TurnEncoder extends Command {
 	private double angle;
 	private double power;
 	private boolean onTarget = false;
-	private static final double FULL_CIRCLE = RobotMap.ROBOT_WIDTH * Math.PI;
+	private boolean _debug = false;
     public TurnEncoder(double turn_angle, double max_power) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -20,10 +21,19 @@ public class TurnEncoder extends Command {
     	angle = turn_angle;
     	power = max_power;
     }
+    public TurnEncoder() {
+    	this(-1, -1);
+    	this._debug = true;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double target = angle / 360 * FULL_CIRCLE;
+    	if (_debug) {
+    		angle = SmartDashboard.getNumber("turnAngle");
+    		power = SmartDashboard.getNumber("turnSpeed");
+    	}
+    	double target = angle * RobotMap.ROBOT_WIDTH * Math.PI / 360;
+    	SmartDashboard.putNumber("turnTarget", target);
     	Robot.driveBase.setupEncoderDistance();
     	Robot.driveBase.setDriveTarget(-target, target);
     }

@@ -10,6 +10,7 @@ import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2785.robot.commands.SetMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.Turn;
+import org.usfirst.frc.team2785.robot.commands.TurnEncoder;
 import org.usfirst.frc.team2785.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -43,12 +44,12 @@ public class Robot extends IterativeRobot {
 		marvinArm = new MarvinArm();
         chooser = new SendableChooser();
         chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
-        chooser.addObject("do a 180", new Turn(180, 0.75));
+        chooser.addObject("do a 180", new TurnEncoder(180, 0.75));
         chooser.addObject("debug mode", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putData("Debug DriveDistance", new DriveDistance(true));
-        SmartDashboard.putData("Debug Turn", new Turn(true));
+        SmartDashboard.putData("Debug TurnEncoder", new TurnEncoder());
         SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
         
     }

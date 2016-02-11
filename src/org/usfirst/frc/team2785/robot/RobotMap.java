@@ -30,7 +30,8 @@ public class RobotMap {
 	public static Servo cameraHorizontal = new Servo(0);
 	public static USBCamera camera = null;//new USBCamera("cam0");
 	
-	public static final double WHEEL_DIAMETER = 8; //inches
+	public static final double WHEEL_DIAMETER = 8; // inches
+	public static final double ROBOT_WIDTH = 24; // also inches
 	public static final double ENCODER_P = 0.05;
 	public static final double ENCODER_I = 0;
 	public static final double ENCODER_D = 0.003;

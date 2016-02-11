@@ -50,9 +50,9 @@ public class DriveBase extends Subsystem {
 		leftEncoder.reset();
 		gyro.reset();
 	}
-	public void setupEncoderDistance(double wheel_diameter) {
-		leftEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.ENCODER_TICKS_PER_ROTATION);
-		rightEncoder.setDistancePerPulse(Math.PI * wheel_diameter / RobotMap.ENCODER_TICKS_PER_ROTATION);
+	public void setupEncoderDistance() {
+		leftEncoder.setDistancePerPulse(Math.PI * RobotMap.WHEEL_DIAMETER / RobotMap.ENCODER_TICKS_PER_ROTATION);
+		rightEncoder.setDistancePerPulse(Math.PI * RobotMap.WHEEL_DIAMETER / RobotMap.ENCODER_TICKS_PER_ROTATION);
 	}
 	public void resetEncoderDistance() {
 		leftEncoder.setDistancePerPulse(360 / RobotMap.ENCODER_TICKS_PER_ROTATION);

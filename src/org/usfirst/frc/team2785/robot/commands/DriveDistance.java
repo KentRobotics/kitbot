@@ -17,10 +17,9 @@ public class DriveDistance extends Command {
 	private double rightDistance;
 	private double leftMaxPower;
 	private double rightMaxPower;
-	private double diameter;
 	private boolean finished = false;
 	private boolean _debug = false;
-    public DriveDistance(double leftDistance, double rightDistance, double leftMaxPower, double rightMaxPower, double diameter) {
+    public DriveDistance(double leftDistance, double rightDistance, double leftMaxPower, double rightMaxPower) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
@@ -30,13 +29,12 @@ public class DriveDistance extends Command {
     	this.rightDistance = rightDistance;
     	this.leftMaxPower = leftMaxPower;
     	this.rightMaxPower = rightMaxPower;
-    	this.diameter = diameter;
     }
     public DriveDistance(double leftDistance, double rightDistance) {
-    	this(leftDistance, rightDistance, RobotMap.NORMAL_MOVE_SPEED, RobotMap.NORMAL_MOVE_SPEED, 360); 
+    	this(leftDistance, rightDistance, RobotMap.NORMAL_MOVE_SPEED, RobotMap.NORMAL_MOVE_SPEED); 
     }
     public DriveDistance(boolean _debug) {
-    	this(-1, -1, -1, -1, -1); //values will be overwritten anyway
+    	this(-1, -1, -1, -1); //values will be overwritten anyway
     	this._debug = true;
     }
 
@@ -47,14 +45,12 @@ public class DriveDistance extends Command {
     		double dRight = SmartDashboard.getNumber("dRight");
     		double pLeft = SmartDashboard.getNumber("pLeft");
     		double pRight = SmartDashboard.getNumber("pRight");
-    		double diameter = SmartDashboard.getNumber("diameter");
     		this.leftDistance = dLeft;
         	this.rightDistance = dRight;
         	this.leftMaxPower = pLeft;
         	this.rightMaxPower = pRight;
-        	this.diameter = diameter;
     	}
-    	drive.setupEncoderDistance(diameter);
+    	drive.setupEncoderDistance();
     	drive.setDriveTarget(leftDistance, rightDistance);
     	SmartDashboard.putBoolean("driving", true);
     }

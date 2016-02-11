@@ -3,22 +3,31 @@ package org.usfirst.frc.team2785.robot.commands;
 import org.usfirst.frc.team2785.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class SetMarvinArm extends Command {
 	private double target;
+	private boolean _debug = false;
     public SetMarvinArm(double angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.marvinArm);
     	target = angle;
     }
+    public SetMarvinArm() {
+    	super(0);
+    	_debug = true;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.marvinArm.setAngle(target);
+    	if (_debug) {
+    		target = SmartDashboard.getNumber("armTarget");
+    	}
+    	Robot.marvinArm.setAngle(-target);
     }
 
     // Called repeatedly when this Command is scheduled to run

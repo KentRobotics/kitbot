@@ -32,7 +32,7 @@ public class TeleopMarvinArm extends Command {
     	}*/
     	Robot.marvinArm.set(OI.camerastick.getY());
     	if (OI.camerastick.getTrigger()) {
-    		Robot.marvinArm.resetSensors();
+    		Robot.marvinArm.hardResetSensors();
     	}
     	Robot.marvinArm.pushData();
     }

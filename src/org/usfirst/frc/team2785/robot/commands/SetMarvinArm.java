@@ -38,15 +38,18 @@ public class SetMarvinArm extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//plus because gyro output is negative
-        return Math.abs(Robot.marvinArm.getAngle() + target) < RobotMap.ARM_TOLERANCE;
+        return Math.abs(Robot.marvinArm.returnPIDInput() + target) < RobotMap.ARM_TOLERANCE;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.marvinArm.stopPID();
+    	Robot.marvinArm.saveGyroPosition();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

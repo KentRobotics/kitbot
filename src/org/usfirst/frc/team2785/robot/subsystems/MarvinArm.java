@@ -6,7 +6,6 @@ import org.usfirst.frc.team2785.robot.commands.TeleopMarvinArm;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -18,6 +17,7 @@ public class MarvinArm extends PIDSubsystem {
     // here. Call these from Commands.
 	private static CANTalon motor;
 	private static AnalogGyro gyro;
+	private double gyroSetting = 0;
 	public MarvinArm() {
 		super("arm", RobotMap.ARM_GYRO_P, RobotMap.ARM_GYRO_I, RobotMap.ARM_GYRO_D);
 		motor = RobotMap.marvinTalon;
@@ -35,13 +35,15 @@ public class MarvinArm extends PIDSubsystem {
     }
     public void setAngle(double angle) {
     	enable();
+    	gyro.reset();
     	setSetpoint(angle);
-    }
-    public double getAngle() {
-    	return gyro.getAngle();
     }
     public void resetSensors() {
     	gyro.reset();
+    }
+    public void hardResetSensors() {
+    	gyro.reset();
+    	gyroSetting = 0;
     }
     public void stopPID() {
     	getPIDController().reset();
@@ -56,11 +58,19 @@ public class MarvinArm extends PIDSubsystem {
     	motor.set(0);
     }
     public void pushData() {
-    	SmartDashboard.putNumber("armGyro", gyro.getAngle());
+    	SmartDashboard.putNumber("armGyro", returnPIDInput());
     	SmartDashboard.putData(this);
     }
-	protected double returnPIDInput() {
-		return gyro.getAngle();
+	public double returnPIDInput() {
+		return gyro.getAngle() + gyroSetting;
+	}
+	public void saveGyroPosition() {
+		gyroSetting = gyro.getAngle();
+		gyro.reset();
+	}
+	public void saveGyroPosition(double pos) {
+		gyroSetting = pos;
+		gyro.reset();
 	}
 	protected void usePIDOutput(double output) {
     	SmartDashboard.putNumber("armPID", output);

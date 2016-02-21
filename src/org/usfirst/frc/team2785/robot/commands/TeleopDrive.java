@@ -27,7 +27,7 @@ public class TeleopDrive extends Command {
     		Robot.driveBase.resetSensors();
     	}
     	double mult = (-OI.stick.getZ() + 1) / 4 + 0.5; //50% at lowest point, 100% at highest
-    	Robot.driveBase.driveV(OI.stick.getY() * mult, -OI.stick.getX() * mult);
+    	Robot.driveBase.driveV(OI.stick.getY() * mult, OI.stick.getX() * mult);
     	Robot.driveBase.pushData();
     }
 

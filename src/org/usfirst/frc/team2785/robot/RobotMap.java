@@ -17,13 +17,14 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	public static CANTalon leftFrontTalon = new CANTalon(1);
-	public static CANTalon leftBackTalon = new CANTalon(2);
-	public static CANTalon rightFrontTalon = new CANTalon(3);
-	public static CANTalon rightBackTalon = new CANTalon(4);
+	public static CANTalon rightFrontTalon = new CANTalon(1);
+	public static CANTalon rightBackTalon = new CANTalon(2);
+	public static CANTalon leftFrontTalon = new CANTalon(3);
+	public static CANTalon leftBackTalon = new CANTalon(4);
 	public static CANTalon marvinTalon = new CANTalon(5);
-	public static Encoder  rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-	public static Encoder  leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	public static Encoder  leftEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
+	public static Encoder  rightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	
 	public static AnalogGyro gyro = new AnalogGyro(1);
 	public static AnalogGyro armGyro = new AnalogGyro(0);
 	public static Servo cameraVertical = new Servo(1);
@@ -31,7 +32,6 @@ public class RobotMap {
 	public static USBCamera camera = null;//new USBCamera("cam0");
 	
 	public static final double WHEEL_DIAMETER = 8; // inches
-	public static final double ROBOT_WIDTH = 28; // also inches
 	public static final double ENCODER_P = 0.05;
 	public static final double ENCODER_I = 0;
 	public static final double ENCODER_D = 0.003;

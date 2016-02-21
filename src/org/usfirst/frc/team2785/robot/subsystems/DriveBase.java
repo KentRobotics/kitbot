@@ -24,15 +24,15 @@ public class DriveBase extends Subsystem {
     private static PIDController gyroPID;
 	
 	public DriveBase() {
-		leftEncoder = RobotMap.leftEncoder;
-		rightEncoder = RobotMap.rightEncoder;
+		leftEncoder = RobotMap.rightEncoder;
+		rightEncoder = RobotMap.leftEncoder;
 		gyro = RobotMap.gyro;
 		leftOutput = new DummyOutput();
 		rightOutput = new DummyOutput();
 		gyroOutput = new DummyOutput();
 		drive = new RobotDrive(RobotMap.leftFrontTalon, RobotMap.leftBackTalon, RobotMap.rightFrontTalon, RobotMap.rightBackTalon);
-	    rightPID = new PIDController(RobotMap.ENCODER_P, RobotMap.ENCODER_I, RobotMap.ENCODER_D, rightEncoder, leftOutput);
-	    leftPID = new PIDController(RobotMap.ENCODER_P, RobotMap.ENCODER_I, RobotMap.ENCODER_D, leftEncoder, rightOutput);
+	    rightPID = new PIDController(RobotMap.ENCODER_P, RobotMap.ENCODER_I, RobotMap.ENCODER_D, rightEncoder, rightOutput);
+	    leftPID = new PIDController(RobotMap.ENCODER_P, RobotMap.ENCODER_I, RobotMap.ENCODER_D, leftEncoder, leftOutput);
 	    gyroPID = new PIDController(RobotMap.GYRO_P, RobotMap.GYRO_I, RobotMap.GYRO_D, gyro, gyroOutput);
 	    setup();
 	}
@@ -98,8 +98,7 @@ public class DriveBase extends Subsystem {
     public boolean turnPID(double max_speed) {
     	double gyroAngle = gyro.getAngle();
     	double gyroSetpoint = gyroPID.getSetpoint();
-    	//turning is reversed
-    	drive.drive(_bound(gyroPID.get(), max_speed), (gyroAngle > gyroSetpoint) ? -1 : 1);
+    	drive.drive(_bound(gyroPID.get(), max_speed), (gyroAngle > gyroSetpoint) ? 1 : -1);
     	//gyroAngle = gyroAngle % 360; // hack for error checking
     	SmartDashboard.putNumber("gyroPID setpoint", gyroSetpoint);
     	SmartDashboard.putNumber("gyroPID value", gyroPID.get());

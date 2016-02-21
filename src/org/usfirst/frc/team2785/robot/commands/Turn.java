@@ -20,7 +20,7 @@ public class Turn extends Command {
     	this.speed = speed;
     	requires(Robot.driveBase);
     }
-    public Turn(boolean _debug) {
+    public Turn() {
     	this(-1, -1); //setting the debug flag will override these parameters
     	this._debug = true;
     }

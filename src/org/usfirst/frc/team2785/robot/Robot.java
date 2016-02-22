@@ -46,6 +46,18 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
         chooser.addObject("do a 180", new Turn(180, 0.75));
         chooser.addObject("debug mode", new ExampleCommand());
+        /*
+        //TODO: implement, duh.
+        chooser.addObject("portcullis", new BreachPortcullis());
+        chooser.addObject("chevals", new BreachChevals());
+        chooser.addObject("moat", new BreachMoat());
+        chooser.addObject("ramparts", new BreachRamparts());
+        chooser.addObject("drawbridge", new BreachDrawbridge());
+        chooser.addObject("sally port", new BreachSallyPort());
+        chooser.addObject("rock wall", new BreachRockWall());
+        chooser.addObject("rough terrain", new BreachTerrain());
+        chooser.addDefault("low bar", new BreachLowBar());
+        */
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putData("Debug DriveDistance", new DriveDistance(true));

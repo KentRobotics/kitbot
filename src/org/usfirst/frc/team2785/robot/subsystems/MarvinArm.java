@@ -35,15 +35,10 @@ public class MarvinArm extends PIDSubsystem {
     }
     public void setAngle(double angle) {
     	enable();
-    	gyro.reset();
     	setSetpoint(angle);
     }
     public void resetSensors() {
     	gyro.reset();
-    }
-    public void hardResetSensors() {
-    	gyro.reset();
-    	gyroSetting = 0;
     }
     public void stopPID() {
     	getPIDController().reset();
@@ -59,7 +54,6 @@ public class MarvinArm extends PIDSubsystem {
     }
     public void pushData() {
     	SmartDashboard.putNumber("armGyro", returnPIDInput());
-    	SmartDashboard.putData(this);
     }
 	public double returnPIDInput() {
 		return gyro.getAngle() + gyroSetting;

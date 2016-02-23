@@ -85,7 +85,7 @@ public class DriveBase extends Subsystem {
     }
     public boolean drivePID(double leftMagnitude, double rightMagnitude) {
     	// assumes setDriveTarget done
-    	drive.tankDrive(_bound(-leftPID.get(), leftMagnitude), _bound(-rightPID.get(), rightMagnitude), false);
+    	drive.tankDrive(_bound(leftPID.get(), leftMagnitude), _bound(rightPID.get(), rightMagnitude), false);
     	double left_reading = leftEncoder.getDistance();
     	double right_reading = rightEncoder.getDistance();
     	double left_target = leftPID.getSetpoint();

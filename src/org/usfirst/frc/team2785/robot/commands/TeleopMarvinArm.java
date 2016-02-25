@@ -25,13 +25,13 @@ public class TeleopMarvinArm extends Command {
     protected void execute() {
         /*
          * if (OI.stick.getRawButton(6)) {
-         * Robot.marvinArm.set((OI.camerastick.getZ() + 1)/2); } else if
+         * Robot.marvinArm.set((OI.happyStick.getZ() + 1)/2); } else if
          * (OI.stick.getRawButton(7)) {
-         * Robot.marvinArm.set(-(OI.camerastick.getZ() + 1)/2); } else {
+         * Robot.marvinArm.set(-(OI.happyStick.getZ() + 1)/2); } else {
          * Robot.marvinArm.set(0); }
          */
-        Robot.marvinArm.set(OI.camerastick.getY());
-        if (OI.camerastick.getTrigger()) {
+        Robot.marvinArm.set(OI.happyStick.getY());
+        if (OI.happyStick.getTrigger()) {
             Robot.marvinArm.resetSensors();
         }
         Robot.marvinArm.pushData();

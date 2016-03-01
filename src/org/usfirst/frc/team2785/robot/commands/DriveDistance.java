@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * A Command that will drive the robot's wheels at specified distances and maximum powers.
+ * Distance is in centimeters, and power is on a scale between -1 (full reverse) and 1 (full forward).
  */
 public class DriveDistance extends Command {
 
@@ -36,7 +37,8 @@ public class DriveDistance extends Command {
         this(leftDistance, rightDistance, RobotMap.NORMAL_MOVE_SPEED, RobotMap.NORMAL_MOVE_SPEED);
     }
 
-    public DriveDistance(boolean _debug) {
+    public DriveDistance() {
+        /* This constructor is intended for debugging purposes only.*/
         this(-1, -1, -1, -1); // values will be overwritten anyway
         this._debug = true;
     }
@@ -44,6 +46,7 @@ public class DriveDistance extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         if (_debug) {
+            // in debug mode, we pull our values from the SmartDashboard instead of the constructor
             double dLeft = SmartDashboard.getNumber("dLeft");
             double dRight = SmartDashboard.getNumber("dRight");
             double pLeft = SmartDashboard.getNumber("pLeft");

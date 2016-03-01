@@ -41,15 +41,18 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         oi = new OI();
         driveBase = new DriveBase();
+        // Commented out until needed.
         // cameraMount = new CameraMount(RobotMap.cameraHorizontal,
         // RobotMap.cameraVertical, RobotMap.camera);
         marvinArm = new MarvinArm();
         chooser = new SendableChooser();
+        //This gives us the nice radio buttons on the SmartDashboard
         chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
         chooser.addObject("do a 180", new Turn(180, 0.75));
         chooser.addObject("debug mode", new ExampleCommand());
         /*
-         * //TODO: implement, duh. chooser.addObject("portcullis", new
+         * TODO: implement, duh.
+         *  chooser.addObject("portcullis", new
          * BreachPortcullis()); chooser.addObject("chevals", new
          * BreachChevals()); chooser.addObject("moat", new BreachMoat());
          * chooser.addObject("ramparts", new BreachRamparts());
@@ -61,7 +64,8 @@ public class Robot extends IterativeRobot {
          */
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-        SmartDashboard.putData("Debug DriveDistance", new DriveDistance(true));
+        //putting commands to the Dashboard makes nice little command buttons
+        SmartDashboard.putData("Debug DriveDistance", new DriveDistance());
         SmartDashboard.putData("Debug Turn", new Turn());
         SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
 

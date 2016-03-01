@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Controls the robot's famous arm.
+ * The angle is relative to the robot if savePosition is not used,
+ * otherwise, it is relative to the floor.
  */
 public class SetMarvinArm extends Command {
     private double target;
@@ -22,6 +24,12 @@ public class SetMarvinArm extends Command {
     }
 
     public SetMarvinArm(double angle, boolean savePosition) {
+        /* If savePosition is true, after moving the arm to its target,
+         * the gyro will save its current position as the actual angle, even if
+         * the robot is actually on tilted ground such as an obstacle. Otherwise,
+         * this command just tells the arm which angle to set itself relative to the plane
+         * of its last reset.
+         */
         super(angle);
         this.savePosition = savePosition;
     }

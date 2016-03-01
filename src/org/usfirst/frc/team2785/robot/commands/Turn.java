@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Tries to turn a certain number of degrees.
+ * Unreliable.
  */
 public class Turn extends Command {
     private double angle;

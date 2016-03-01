@@ -3,6 +3,7 @@ package org.usfirst.frc.team2785.robot.subsystems;
 import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.commands.TeleopMarvinArm;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -17,10 +18,12 @@ public class MarvinArm extends PIDSubsystem {
     // here. Call these from Commands.
     private static CANTalon motor;
     private static AnalogGyro gyro;
+    private static DigitalInput limit;
     private double gyroSetting = 0;
 
     public MarvinArm() {
         super("arm", RobotMap.ARM_GYRO_P, RobotMap.ARM_GYRO_I, RobotMap.ARM_GYRO_D);
+        limit = RobotMap.marvinLimit;
         motor = RobotMap.marvinTalon;
         motor.enableBrakeMode(true);
         gyro = RobotMap.armGyro;

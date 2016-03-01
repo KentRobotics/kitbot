@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.vision.USBCamera;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * This is in essence a header file for the whole robot. All the individual component
+ * objects and constants for PID loops are defined here.
  */
 public class RobotMap {
     // For example to map the left and right motors, you could define the
@@ -26,7 +28,7 @@ public class RobotMap {
     public static CANTalon marvinTalon = new CANTalon(5);
     public static Encoder leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
     public static Encoder rightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-
+    public static DigitalInput marvinLimit = new DigitalInput(4);
     public static AnalogGyro gyro = new AnalogGyro(1);
     public static AnalogGyro armGyro = new AnalogGyro(0);
     public static Servo cameraVertical = new Servo(1);

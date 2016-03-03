@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import org.usfirst.frc.team2785.misc.Player;
+import org.usfirst.frc.team2785.misc.Recorder;
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
-import org.usfirst.frc.team2785.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2785.robot.commands.Nothing;
 import org.usfirst.frc.team2785.robot.commands.SetMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.Turn;
 import org.usfirst.frc.team2785.robot.subsystems.*;
@@ -24,11 +26,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-    public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
     public static OI oi;
     public static DriveBase driveBase;
     public static CameraMount cameraMount;
     public static MarvinArm marvinArm;
+    public static Recorder recorder;
+    public static Player player;
     Command autonomousCommand;
     Command teleopCommand;
     SendableChooser chooser;
@@ -46,10 +49,12 @@ public class Robot extends IterativeRobot {
         // RobotMap.cameraVertical, RobotMap.camera);
         marvinArm = new MarvinArm();
         chooser = new SendableChooser();
+        recorder = new Recorder();
+        player = new Player();
         //This gives us the nice radio buttons on the SmartDashboard
         chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
         chooser.addObject("do a 180", new Turn(180, 0.75));
-        chooser.addObject("debug mode", new ExampleCommand());
+        chooser.addObject("debug mode", new Nothing());
         /*
          * TODO: implement, duh.
          *  chooser.addObject("portcullis", new

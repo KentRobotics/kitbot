@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2785.robot.subsystems;
 
+import org.usfirst.frc.team2785.robot.Robot;
 import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.commands.TeleopMarvinArm;
 
@@ -19,7 +20,6 @@ public class MarvinArm extends PIDSubsystem {
     private static CANTalon motor;
     private static AnalogGyro gyro;
     private static DigitalInput limit;
-    private double gyroSetting = 0;
 
     public MarvinArm() {
         super("arm", RobotMap.ARM_GYRO_P, RobotMap.ARM_GYRO_I, RobotMap.ARM_GYRO_D);
@@ -66,24 +66,20 @@ public class MarvinArm extends PIDSubsystem {
 
     public void pushData() {
         SmartDashboard.putNumber("armGyro", returnPIDInput());
+        Robot.recorder.put("marvinArm.speed", motor.get());
+        Robot.recorder.put("marvinArm.angle", returnPIDInput());
     }
 
     public double returnPIDInput() {
-        return gyro.getAngle() + gyroSetting;
-    }
-
-    public void saveGyroPosition() {
-        gyroSetting = gyro.getAngle();
-        gyro.reset();
-    }
-
-    public void saveGyroPosition(double pos) {
-        gyroSetting = pos;
-        gyro.reset();
+        return gyro.getAngle();
     }
 
     protected void usePIDOutput(double output) {
         SmartDashboard.putNumber("armPID", output);
         motor.set(-output);
+    }
+
+    public boolean getLimit() {
+        return limit.get();
     }
 }

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.*;
 
 import org.usfirst.frc.team2785.misc.DummyOutput;
+import org.usfirst.frc.team2785.robot.Robot;
 import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.commands.TeleopDrive;;
 
@@ -73,7 +74,9 @@ public class DriveBase extends Subsystem {
         drive.setSafetyEnabled(true);
     }
 
-    public void driveV(double mag, double turn) {
+    public void teleopDrive(double mag, double turn) {
+        Robot.recorder.put("driveBase.magnitude", mag);
+        Robot.recorder.put("driveBase.turn", turn);
         drive.arcadeDrive(mag, turn, false);
     }
 
@@ -159,8 +162,14 @@ public class DriveBase extends Subsystem {
     }
 
     public void pushData() {
-        SmartDashboard.putNumber("leftEncoder", leftEncoder.getDistance());
-        SmartDashboard.putNumber("rightEncoder", rightEncoder.getDistance());
-        SmartDashboard.putNumber("gyro", gyro.getAngle());
+        double leftEncoderDistance = leftEncoder.getDistance();
+        double rightEncoderDistance = rightEncoder.getDistance();
+        double gyroAngle = gyro.getAngle();
+        Robot.recorder.put("driveBase.leftEncoder", leftEncoderDistance);
+        Robot.recorder.put("driveBase.rightEncoder", rightEncoderDistance);
+        Robot.recorder.put("driveBase.gyroAngle", gyroAngle);
+        SmartDashboard.putNumber("leftEncoder", leftEncoderDistance);
+        SmartDashboard.putNumber("rightEncoder", rightEncoderDistance);
+        SmartDashboard.putNumber("gyro", gyroAngle);
     }
 }

@@ -1,5 +1,8 @@
 package org.usfirst.frc.team2785.robot;
 
+import org.usfirst.frc.team2785.misc.Player;
+import org.usfirst.frc.team2785.misc.Recorder;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.vision.USBCamera;
 
@@ -34,7 +37,7 @@ public class RobotMap {
     public static Servo cameraVertical = new Servo(1);
     public static Servo cameraHorizontal = new Servo(0);
     public static USBCamera camera = null;// new USBCamera("cam0");
-
+    
     public static final double WHEEL_DIAMETER = 8; // inches
     public static final double ENCODER_P = 0.05;
     public static final double ENCODER_I = 0;

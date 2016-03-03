@@ -31,9 +31,6 @@ public class TeleopMarvinArm extends Command {
          * Robot.marvinArm.set(0); }
          */
         Robot.marvinArm.set(OI.happyStick.getY());
-        if (OI.happyStick.getTrigger()) {
-            Robot.marvinArm.resetSensors();
-        }
         Robot.marvinArm.pushData();
     }
 

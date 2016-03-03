@@ -2,7 +2,9 @@ package org.usfirst.frc.team2785.robot.commands;
 
 import org.usfirst.frc.team2785.robot.OI;
 import org.usfirst.frc.team2785.robot.Robot;
+import org.usfirst.frc.team2785.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,17 +21,20 @@ public class TeleopDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
+        Robot.driveBase.resetSensors();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (OI.stick.getTrigger()) {
-            Robot.driveBase.resetSensors();
-        }
+        //if (OI.stick.getTrigger()) {
+        //    Robot.driveBase.resetSensors();
+        //}
         double mult = (-OI.stick.getZ() + 1) / 4 + 0.5; // 50% at lowest point,
                                                         // 100% at highest
-        Robot.driveBase.driveV(-OI.stick.getY() * mult, -OI.stick.getX() * mult);
+        double Y = -OI.stick.getY() * mult;
+        double X = -OI.stick.getX() * mult;
+
+        Robot.driveBase.teleopDrive(Y, X);
         Robot.driveBase.pushData();
     }
 

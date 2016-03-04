@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.*;
 
 import org.usfirst.frc.team2785.misc.DummyOutput;
+import org.usfirst.frc.team2785.misc.PlayableSubsystem;
+import org.usfirst.frc.team2785.misc.Player;
+import org.usfirst.frc.team2785.misc.TableReader;
 import org.usfirst.frc.team2785.robot.Robot;
 import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.commands.TeleopDrive;;
@@ -12,7 +15,7 @@ import org.usfirst.frc.team2785.robot.commands.TeleopDrive;;
 /**
  *
  */
-public class DriveBase extends Subsystem {
+public class DriveBase extends Subsystem implements PlayableSubsystem {
 
     private static Encoder leftEncoder;
     private static Encoder rightEncoder;
@@ -24,6 +27,11 @@ public class DriveBase extends Subsystem {
     private static PIDController leftPID;
     private static PIDController rightPID;
     private static PIDController gyroPID;
+    private boolean playerUsePID;
+    private TableReader leftEncoderTable;
+    private TableReader rightEncoderTable;
+    private TableReader magnitudeTable;
+    private TableReader turnTable;
 
     public DriveBase() {
         leftEncoder = RobotMap.rightEncoder;
@@ -167,9 +175,52 @@ public class DriveBase extends Subsystem {
         double gyroAngle = gyro.getAngle();
         Robot.recorder.put("driveBase.leftEncoder", leftEncoderDistance);
         Robot.recorder.put("driveBase.rightEncoder", rightEncoderDistance);
-        Robot.recorder.put("driveBase.gyroAngle", gyroAngle);
+        //Robot.recorder.put("driveBase.gyroAngle", gyroAngle);
         SmartDashboard.putNumber("leftEncoder", leftEncoderDistance);
         SmartDashboard.putNumber("rightEncoder", rightEncoderDistance);
         SmartDashboard.putNumber("gyro", gyroAngle);
+    }
+    public void setPlayerUsePID(boolean yes) {
+        playerUsePID = yes;
+    }
+    @Override
+    public void playerSetup(Player p) {
+        if (playerUsePID) {
+            leftEncoderTable = p.getReader("driveBase.leftEncoder");
+            rightEncoderTable = p.getReader("driveBase.rightEncoder");
+            leftPID.enable();
+            rightPID.enable();
+        } else {
+            magnitudeTable = p.getReader("driveBase.magnitude");
+            turnTable = p.getReader("driveBase.turn");
+        }
+    }
+
+    @Override
+    public void play() {
+        if (playerUsePID) {
+            leftPID.setSetpoint(leftEncoderTable.getReading());
+            rightPID.setSetpoint(rightEncoderTable.getReading());
+            drivePID(1,1);
+            
+        } else {
+            teleopDrive(magnitudeTable.getReading(), turnTable.getReading());
+        }
+        
+    }
+
+    @Override
+    public boolean donePlaying() {
+        if (playerUsePID) {
+            return leftEncoderTable.hasNext();
+        } else {
+            return magnitudeTable.hasNext();
+        }
+    }
+
+    @Override
+    public void stopPlaying() {
+        stopPID();
+        drive.stopMotor();
     }
 }

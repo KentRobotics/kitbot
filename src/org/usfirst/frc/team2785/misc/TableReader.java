@@ -20,6 +20,10 @@ public class TableReader {
     public boolean hasNext() {
         return datas.hasNext();
     }
+    /**
+     * Returns the value matching the current time offset from the last reset.
+     * @return the current value for the current time
+     */
     public double getReading() {
         Date now = new Date();
         if ((now.getTime() - startTime.getTime()) > currentTime && times.hasNext()) {

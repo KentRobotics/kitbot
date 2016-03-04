@@ -11,6 +11,8 @@ import org.usfirst.frc.team2785.misc.Player;
 import org.usfirst.frc.team2785.misc.Recorder;
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.Nothing;
+import org.usfirst.frc.team2785.robot.commands.PlayRecordedTeleop;
+import org.usfirst.frc.team2785.robot.commands.PlayRecording;
 import org.usfirst.frc.team2785.robot.commands.SetMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.Turn;
 import org.usfirst.frc.team2785.robot.subsystems.*;
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     Command teleopCommand;
     SendableChooser chooser;
+    public static SendableChooser recordingChooser;
     CommandGroup command;
 
     /**
@@ -42,7 +45,6 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        oi = new OI();
         driveBase = new DriveBase();
         // Commented out until needed.
         // cameraMount = new CameraMount(RobotMap.cameraHorizontal,
@@ -50,7 +52,9 @@ public class Robot extends IterativeRobot {
         marvinArm = new MarvinArm();
         chooser = new SendableChooser();
         recorder = new Recorder();
+        recordingChooser = new SendableChooser();
         player = new Player();
+        oi = new OI();
         //This gives us the nice radio buttons on the SmartDashboard
         chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
         chooser.addObject("do a 180", new Turn(180, 0.75));
@@ -67,12 +71,23 @@ public class Robot extends IterativeRobot {
          * chooser.addObject("rough terrain", new BreachTerrain());
          * chooser.addDefault("low bar", new BreachLowBar());
          */
+        recordingChooser.addObject("portcullis", RobotMap.portcullisFileName);
+        recordingChooser.addObject("chevals", RobotMap.chevalsFileName);
+        recordingChooser.addObject("moat", RobotMap.moatFileName);
+        recordingChooser.addObject("ramparts", RobotMap.rampartsFileName);
+        recordingChooser.addObject("drawbridge", RobotMap.drawbridgeFileName);
+        recordingChooser.addObject("sally port", RobotMap.sallyPortFileName);
+        recordingChooser.addObject("rock wall", RobotMap.rockWallFileName);
+        recordingChooser.addObject("rough terrain", RobotMap.roughTerrainFileName);
+        recordingChooser.addDefault("low bar", RobotMap.lowBarFileName);
+        SmartDashboard.putData("Recording Name", recordingChooser);
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         //putting commands to the Dashboard makes nice little command buttons
         SmartDashboard.putData("Debug DriveDistance", new DriveDistance());
         SmartDashboard.putData("Debug Turn", new Turn());
         SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
+        SmartDashboard.putData("Replay Selected Recording", new PlayRecordedTeleop());
 
     }
 

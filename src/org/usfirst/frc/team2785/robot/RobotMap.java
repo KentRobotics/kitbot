@@ -58,4 +58,13 @@ public class RobotMap {
     public static final double NORMAL_TURN_SPEED = 0.6;
     public static final double NORMAL_MOVE_SPEED = 0.5;
 
+    public static final String portcullisFileName = "portcullis"; 
+    public static final String chevalsFileName = "chevals";
+    public static final String moatFileName = "moat";
+    public static final String rampartsFileName = "ramparts";
+    public static final String drawbridgeFileName = "drawbridge";
+    public static final String sallyPortFileName = "sally_port";
+    public static final String rockWallFileName = "rock_wall";
+    public static final String roughTerrainFileName = "rough_terrain";
+    public static final String lowBarFileName = "low_bar";
 }

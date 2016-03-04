@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class PlayRecordedTeleop extends CommandGroup {
     
-    public PlayRecordedTeleop(String fileName) {
+    public PlayRecordedTeleop() {
         addSequential(new CalibrateMarvinArm());
-        addParallel(new PlayRecording(Robot.driveBase, fileName, false));
-        addParallel(new PlayRecording(Robot.marvinArm, fileName, true));
+        addParallel(new PlayRecording(Robot.driveBase, false));
+        addParallel(new PlayRecording(Robot.marvinArm, true));
         addSequential(new Nothing());
         // Add Commands here:
         // e.g. addSequential(new Command1());

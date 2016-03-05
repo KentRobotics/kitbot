@@ -15,6 +15,7 @@ import org.usfirst.frc.team2785.robot.commands.PlayRecordedTeleop;
 import org.usfirst.frc.team2785.robot.commands.PlayRecording;
 import org.usfirst.frc.team2785.robot.commands.SetMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.Turn;
+import org.usfirst.frc.team2785.robot.commands.batchjobs.BreachLowBar;
 import org.usfirst.frc.team2785.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,9 +57,10 @@ public class Robot extends IterativeRobot {
         player = new Player();
         oi = new OI();
         //This gives us the nice radio buttons on the SmartDashboard
-        chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
-        chooser.addObject("do a 180", new Turn(180, 0.75));
+        //chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
+        //chooser.addObject("do a 180", new Turn(180, 0.75));
         chooser.addObject("debug mode", new Nothing());
+        chooser.addObject("replay selected recording", new PlayRecordedTeleop());
         /*
          * TODO: implement, duh.
          *  chooser.addObject("portcullis", new
@@ -69,8 +71,8 @@ public class Robot extends IterativeRobot {
          * chooser.addObject("sally port", new BreachSallyPort());
          * chooser.addObject("rock wall", new BreachRockWall());
          * chooser.addObject("rough terrain", new BreachTerrain());
-         * chooser.addDefault("low bar", new BreachLowBar());
          */
+        chooser.addDefault("low bar", new BreachLowBar());
         recordingChooser.addObject("portcullis", RobotMap.portcullisFileName);
         recordingChooser.addObject("chevals", RobotMap.chevalsFileName);
         recordingChooser.addObject("moat", RobotMap.moatFileName);
@@ -80,6 +82,7 @@ public class Robot extends IterativeRobot {
         recordingChooser.addObject("rock wall", RobotMap.rockWallFileName);
         recordingChooser.addObject("rough terrain", RobotMap.roughTerrainFileName);
         recordingChooser.addDefault("low bar", RobotMap.lowBarFileName);
+        // (String) recordingChooser.getSelected();
         SmartDashboard.putData("Recording Name", recordingChooser);
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);

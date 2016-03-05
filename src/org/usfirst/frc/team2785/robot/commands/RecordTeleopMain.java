@@ -5,6 +5,7 @@ import java.io.File;
 import org.usfirst.frc.team2785.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -12,6 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RecordTeleopMain extends Command {
     private static final String savePath = "/home/lvuser/data";
     public RecordTeleopMain() {
+        SmartDashboard.putBoolean("recordingTeleop", false);
+        File dataDir = new File(savePath);
+        dataDir.mkdir();
         // Use requires() here to declare 0subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,6 +24,7 @@ public class RecordTeleopMain extends Command {
     protected void initialize() {
         Robot.recorder.clear();
         Robot.recorder.setEnabled(true);
+        SmartDashboard.putBoolean("recordingTeleop", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,8 +38,7 @@ public class RecordTeleopMain extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-        File dataDir = new File(savePath);
-        dataDir.mkdir();
+        SmartDashboard.putBoolean("recordingTeleop", false);
         Robot.recorder.write(savePath + "/" + (String) Robot.recordingChooser.getSelected());
     }
 

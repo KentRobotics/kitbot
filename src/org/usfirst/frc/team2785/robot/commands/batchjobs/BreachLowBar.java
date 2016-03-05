@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2785.robot.commands.batchjobs;
 
+import org.usfirst.frc.team2785.robot.commands.CalibrateMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -26,6 +27,7 @@ public class BreachLowBar extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+        addSequential(new CalibrateMarvinArm());
         addSequential(new DriveDistance(108, 108)); // approximate length
                                                     // between neutral zone line
                                                     // and flap

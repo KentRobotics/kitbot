@@ -26,7 +26,7 @@ public class TableReader {
      */
     public double getReading() {
         Date now = new Date();
-        if ((now.getTime() - startTime.getTime()) > currentTime && times.hasNext()) {
+        while ((now.getTime() - startTime.getTime()) > currentTime && times.hasNext()) {
             currentTime = times.next();
             currentValue = datas.next();
         }

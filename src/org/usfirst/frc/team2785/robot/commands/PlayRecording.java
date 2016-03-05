@@ -6,6 +6,7 @@ import org.usfirst.frc.team2785.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -14,13 +15,13 @@ public class PlayRecording extends Command {
     private Subsystem subsystem;
     private PlayableSubsystem playableSubsystem;
     private boolean finished = false;
-    private boolean usePID;
-    public PlayRecording(PlayableSubsystem subsystem, boolean usePID) {
+    private String SmartDashboardKey;
+    public PlayRecording(PlayableSubsystem subsystem, String configKey) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         playableSubsystem = subsystem;
-        this.usePID = usePID;
-        this.subsystem = subsystem.getSubsystem(); 
+        this.subsystem = subsystem.getSubsystem();
+        this.SmartDashboardKey = configKey;
         // in our use cases, subsystem.getSubsystem() == subsystem,
         // but subsystem.getSubsystem just casts to Subsystem to avoid errors
         // this is a situation where duck typing would have been useful.
@@ -34,7 +35,7 @@ public class PlayRecording extends Command {
             return;
         }
         try {
-            playableSubsystem.setPlayerUsePID(usePID);
+            playableSubsystem.setPlayerUsePID(SmartDashboard.getBoolean(SmartDashboardKey));
             playableSubsystem.playerSetup(Robot.player);
         } catch (Exception e) {
             e.printStackTrace();

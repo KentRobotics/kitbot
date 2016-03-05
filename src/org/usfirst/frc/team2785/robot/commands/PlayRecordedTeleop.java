@@ -3,16 +3,21 @@ package org.usfirst.frc.team2785.robot.commands;
 import org.usfirst.frc.team2785.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class PlayRecordedTeleop extends CommandGroup {
-    
+    public static final String driveBasePIDKey = "driveBase Playback use PID";
+    public static final String marvinArmPIDKey = "marvinArm Playback use PID";
     public PlayRecordedTeleop() {
+    	
+    	SmartDashboard.putBoolean(driveBasePIDKey, false);
+    	SmartDashboard.putBoolean(marvinArmPIDKey, true);
         addSequential(new CalibrateMarvinArm());
-        addParallel(new PlayRecording(Robot.driveBase, false));
-        addParallel(new PlayRecording(Robot.marvinArm, true));
+        addParallel(new PlayRecording(Robot.driveBase, driveBasePIDKey));
+        addParallel(new PlayRecording(Robot.marvinArm, marvinArmPIDKey));
         addSequential(new Nothing());
         // Add Commands here:
         // e.g. addSequential(new Command1());

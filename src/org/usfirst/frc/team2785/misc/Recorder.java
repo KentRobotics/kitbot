@@ -20,6 +20,10 @@ public class Recorder {
     public Recorder() {
         clear();
     }
+    /**
+     * Re-instantiates the underlying data structures with new instances.
+     * In other words, clear the Recorder of previous data.
+     */
     public void clear() {
         data = new HashMap<String, ArrayList<Double>>();
         timeStamps = new HashMap<String, ArrayList<Long>>();

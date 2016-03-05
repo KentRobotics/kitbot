@@ -30,6 +30,7 @@ public class Player {
             timeStamps = (Map<String, ArrayList<Long>>) objIn.readObject();
             fileIn.close();
             objIn.close();
+            System.out.println("Read record file from " + filePath);
             return true;
         } catch (Exception e) {
             // there are plenty of things that will can go wrong here.

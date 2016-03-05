@@ -76,6 +76,7 @@ public class Robot extends IterativeRobot {
          * chooser.addObject("rock wall", new BreachRockWall());
          * chooser.addObject("rough terrain", new BreachTerrain());
          */
+        chooser.addObject("rock wall", new BreachRockWall());
         chooser.addDefault("low bar", new BreachLowBar());
         recordingChooser.addObject("portcullis", RobotMap.portcullisFileName);
         recordingChooser.addObject("chevals", RobotMap.chevalsFileName);

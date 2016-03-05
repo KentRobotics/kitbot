@@ -28,6 +28,7 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
     private static PIDController rightPID;
     private static PIDController gyroPID;
     private boolean playerUsePID;
+    private boolean debugHarness = false;
     private TableReader leftEncoderTable;
     private TableReader rightEncoderTable;
     private TableReader magnitudeTable;
@@ -50,7 +51,7 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
         resetEncoderDistance();
         leftPID.setContinuous();
         rightPID.setContinuous();
-        debugInitPID();
+        //debugInitPID();
         resetSensors();
     }
 
@@ -134,6 +135,7 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
     }
 
     private void debugApplyPID() {
+    	debugHarness = true;
         // for pid tuning...
         leftPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"),
                 SmartDashboard.getNumber("encD"));
@@ -144,7 +146,8 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
     }
 
     private void debugInitPID() {
-        // also for pid tuning
+    	if (!debugHarness) { return; }
+    	// also for pid tuning
         SmartDashboard.putNumber("encP", RobotMap.ENCODER_P);
         SmartDashboard.putNumber("encI", RobotMap.ENCODER_I);
         SmartDashboard.putNumber("encD", RobotMap.ENCODER_D);

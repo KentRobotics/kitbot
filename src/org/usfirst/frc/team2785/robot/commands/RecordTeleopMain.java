@@ -3,6 +3,7 @@ package org.usfirst.frc.team2785.robot.commands;
 import java.io.File;
 
 import org.usfirst.frc.team2785.robot.Robot;
+import org.usfirst.frc.team2785.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -11,10 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class RecordTeleopMain extends Command {
-    private static final String savePath = "/home/lvuser/data";
     public RecordTeleopMain() {
         SmartDashboard.putBoolean("recordingTeleop", false);
-        File dataDir = new File(savePath);
+        File dataDir = new File(RobotMap.RECORDING_SAVE_PATH);
         dataDir.mkdir();
         // Use requires() here to declare 0subsystem dependencies
         // eg. requires(chassis);
@@ -39,7 +39,7 @@ public class RecordTeleopMain extends Command {
     // Called once after isFinished returns true
     protected void end() {
         SmartDashboard.putBoolean("recordingTeleop", false);
-        Robot.recorder.write(savePath + "/" + (String) Robot.recordingChooser.getSelected());
+        Robot.recorder.write(RobotMap.RECORDING_SAVE_PATH + "/" + (String) Robot.recordingChooser.getSelected());
     }
 
     // Called when another command which requires one or more of the same

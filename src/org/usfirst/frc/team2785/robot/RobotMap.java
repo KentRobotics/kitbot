@@ -67,4 +67,5 @@ public class RobotMap {
     public static final String rockWallFileName = "rock_wall";
     public static final String roughTerrainFileName = "rough_terrain";
     public static final String lowBarFileName = "low_bar";
+    public static final String RECORDING_SAVE_PATH = "/home/lvuser/data";
 }

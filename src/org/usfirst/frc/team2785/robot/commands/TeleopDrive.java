@@ -2,9 +2,7 @@ package org.usfirst.frc.team2785.robot.commands;
 
 import org.usfirst.frc.team2785.robot.OI;
 import org.usfirst.frc.team2785.robot.Robot;
-import org.usfirst.frc.team2785.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

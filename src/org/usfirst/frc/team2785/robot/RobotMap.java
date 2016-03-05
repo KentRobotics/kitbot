@@ -1,8 +1,5 @@
 package org.usfirst.frc.team2785.robot;
 
-import org.usfirst.frc.team2785.misc.Player;
-import org.usfirst.frc.team2785.misc.Recorder;
-
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.vision.USBCamera;
 

@@ -29,15 +29,17 @@ public class PlayRecording extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        finished = !Robot.player.read(RobotMap.RECORDING_SAVE_PATH + "/" + Robot.recordingChooser.getSelected());
+        if (finished) {
+            return;
+        }
         try {
-            Robot.player.read(RobotMap.RECORDING_SAVE_PATH + "/" + Robot.recordingChooser.getSelected());
+            playableSubsystem.setPlayerUsePID(usePID);
+            playableSubsystem.playerSetup(Robot.player);
         } catch (Exception e) {
             e.printStackTrace();
             finished = true;
-            return;
         }
-        playableSubsystem.setPlayerUsePID(usePID);
-        playableSubsystem.playerSetup(Robot.player);
     }
 
     // Called repeatedly when this Command is scheduled to run

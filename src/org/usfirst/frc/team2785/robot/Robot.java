@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2785.misc.Player;
 import org.usfirst.frc.team2785.misc.Recorder;
+import org.usfirst.frc.team2785.robot.commands.CalibrateMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.Nothing;
 import org.usfirst.frc.team2785.robot.commands.PlayRecordedTeleop;
@@ -45,13 +46,13 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+        recorder = new Recorder();
         driveBase = new DriveBase();
         // Commented out until needed.
         // cameraMount = new CameraMount(RobotMap.cameraHorizontal,
         // RobotMap.cameraVertical, RobotMap.camera);
         marvinArm = new MarvinArm();
         chooser = new SendableChooser();
-        recorder = new Recorder();
         recordingChooser = new SendableChooser();
         player = new Player();
         oi = new OI();
@@ -90,6 +91,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Debug Turn", new Turn());
         SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
         SmartDashboard.putData("Replay Selected Recording", new PlayRecordedTeleop());
+        SmartDashboard.putData("Debug CalibrateMarvinArm", new CalibrateMarvinArm());
 
     }
 

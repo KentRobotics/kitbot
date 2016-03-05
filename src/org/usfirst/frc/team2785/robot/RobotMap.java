@@ -42,11 +42,11 @@ public class RobotMap {
     public static final double GYRO_P = 0.007;
     public static final double GYRO_I = 0;
     public static final double GYRO_D = 0.005; // best for turning 90 degrees
-    public static final double ARM_GYRO_P = 1.000;
+    public static final double ARM_GYRO_P = 0.070;
     public static final double ARM_GYRO_I = 0;
-    public static final double ARM_GYRO_D = 0.600; // best for turning 90
+    public static final double ARM_GYRO_D = 0.040; // best for turning 90
                                                    // degrees
-    public static final double ARM_TOLERANCE = 2;
+    public static final double ARM_TOLERANCE = 5;
     public static final double ENCODER_TICKS_PER_ROTATION = 250; // for standard
     public static final double ENCODER_TOLERANCE = 5;
     public static final double GYRO_TOLERANCE = 3;

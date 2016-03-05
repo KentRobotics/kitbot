@@ -19,6 +19,7 @@ import org.usfirst.frc.team2785.robot.commands.batchjobs.*;
 import org.usfirst.frc.team2785.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -49,8 +50,10 @@ public class Robot extends IterativeRobot {
         recorder = new Recorder();
         driveBase = new DriveBase();
         // Commented out until needed.
-        // cameraMount = new CameraMount(RobotMap.cameraHorizontal,
-        // RobotMap.cameraVertical, RobotMap.camera);
+
+        RobotMap.camera = new USBCamera("cam0");
+        cameraMount = new CameraMount(RobotMap.camera);
+        	// RobotMap.cameraVertical, RobotMap.camera);
         marvinArm = new MarvinArm();
         chooser = new SendableChooser();
         recordingChooser = new SendableChooser();

@@ -21,7 +21,7 @@ public class TeleopCamera extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         //Robot.cameraMount.resetPosition();
-        Robot.cameraMount.startServer();
+        //Robot.cameraMount.startServer();
     }
 
     // Called repeatedly when this Command is scheduled to run

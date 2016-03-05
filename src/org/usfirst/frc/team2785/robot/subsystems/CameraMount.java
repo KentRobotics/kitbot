@@ -32,6 +32,7 @@ public class CameraMount extends Subsystem {
     public void startServer() {
         CameraServer server = CameraServer.getInstance();
         server.setQuality(RobotMap.CAMERA_QUALITY);
+        server.setSize(1);// 320x240
         server.startAutomaticCapture(camera);
     }
 

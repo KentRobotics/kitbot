@@ -1,5 +1,8 @@
 package org.usfirst.frc.team2785.robot.commands.batchjobs;
 
+import org.usfirst.frc.team2785.robot.commands.AngleDrive;
+import org.usfirst.frc.team2785.robot.commands.CalibrateMarvinArm;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -24,5 +27,7 @@ public class BreachRamparts extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addSequential(new CalibrateMarvinArm());
+    	addSequential(new AngleDrive(108*1.5, 108*1.5, 0, 1));
     }
 }

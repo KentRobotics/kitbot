@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.*;
 
+import java.util.Date;
+
 import org.usfirst.frc.team2785.misc.DummyOutput;
 import org.usfirst.frc.team2785.misc.PlayableSubsystem;
 import org.usfirst.frc.team2785.misc.Player;
@@ -29,6 +31,8 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
     private static PIDController gyroPID;
     private boolean playerUsePID;
     private boolean debugHarness = false;
+    private double angleTurnTargetLeft;
+    private double angleTurnTargetRight;
     private TableReader leftEncoderTable;
     private TableReader rightEncoderTable;
     private TableReader magnitudeTable;
@@ -104,7 +108,14 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
         gyroPID.enable();
         gyroPID.setSetpoint(angle);
     }
-
+    public void setAngleTurnTarget(double left, double right, double angle) {
+    	resetSensors();
+    	debugApplyPID();
+    	gyroPID.enable();
+    	gyroPID.setSetpoint(angle);
+    	angleTurnTargetLeft = left;
+    	angleTurnTargetRight = right;
+    }
     public boolean drivePID(double leftMagnitude, double rightMagnitude) {
         // assumes setDriveTarget done
         drive.tankDrive(_bound(leftPID.get(), leftMagnitude), _bound(rightPID.get(), rightMagnitude), false);
@@ -127,7 +138,15 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
         SmartDashboard.putNumber("gyroPID value", gyroPID.get());
         return Math.abs(gyroAngle - gyroSetpoint) <= RobotMap.GYRO_TOLERANCE;
     }
-
+    public boolean angleTurnPID(double max_speed) {
+        double gyroSetpoint = gyroPID.getSetpoint();
+        drive.drive(max_speed, gyroPID.get());
+        // gyroAngle = gyroAngle % 360; // hack for error checking
+        SmartDashboard.putNumber("gyroPID setpoint", gyroSetpoint);
+        SmartDashboard.putNumber("gyroPID value", gyroPID.get());
+        return Math.abs(leftEncoder.get() - angleTurnTargetLeft) <= RobotMap.ENCODER_TOLERANCE
+                && Math.abs(rightEncoder.get() - angleTurnTargetRight) <= RobotMap.ENCODER_TOLERANCE;
+    }
     public void stopPID() {
         leftPID.reset();
         rightPID.reset();

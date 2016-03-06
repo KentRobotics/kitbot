@@ -63,8 +63,8 @@ public class Robot extends IterativeRobot {
         //This gives us the nice radio buttons on the SmartDashboard
         //chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
         //chooser.addObject("do a 180", new Turn(180, 0.75));
-        chooser.addObject("debug mode", new Nothing());
-        chooser.addObject("replay selected recording", new PlayRecordedTeleop());
+        //chooser.addObject("debug mode", new Nothing());
+        //chooser.addObject("replay selected recording", new PlayRecordedTeleop());
         /*
          * TODO: implement, duh.
          *  chooser.addObject("portcullis", new
@@ -76,6 +76,7 @@ public class Robot extends IterativeRobot {
          * chooser.addObject("rock wall", new BreachRockWall());
          * chooser.addObject("rough terrain", new BreachTerrain());
          */
+        chooser.addObject("ramparts", new BreachRamparts());
         chooser.addObject("rock wall", new BreachRockWall());
         chooser.addDefault("low bar", new BreachLowBar());
         recordingChooser.addObject("portcullis", RobotMap.portcullisFileName);
@@ -88,15 +89,15 @@ public class Robot extends IterativeRobot {
         recordingChooser.addObject("rough terrain", RobotMap.roughTerrainFileName);
         recordingChooser.addDefault("low bar", RobotMap.lowBarFileName);
         // (String) recordingChooser.getSelected();
-        SmartDashboard.putData("Recording Name", recordingChooser);
+        //SmartDashboard.putData("Recording Name", recordingChooser);
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         //putting commands to the Dashboard makes nice little command buttons
-        SmartDashboard.putData("Debug DriveDistance", new DriveDistance());
-        SmartDashboard.putData("Debug Turn", new Turn());
-        SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
-        SmartDashboard.putData("Replay Selected Recording", new PlayRecordedTeleop());
-        SmartDashboard.putData("Debug MarvinArm", new CalibrateMarvinArm());
+        //SmartDashboard.putData("Debug DriveDistance", new DriveDistance());
+        //SmartDashboard.putData("Debug Turn", new Turn());
+        //SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
+        //SmartDashboard.putData("Replay Selected Recording", new PlayRecordedTeleop());
+        //SmartDashboard.putData("Debug MarvinArm", new CalibrateMarvinArm());
 
     }
 

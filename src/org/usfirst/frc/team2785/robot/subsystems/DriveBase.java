@@ -154,7 +154,7 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
     }
 
     private void debugApplyPID() {
-    	debugHarness = true;
+    	if (!debugHarness) {return;}
         // for pid tuning...
         leftPID.setPID(SmartDashboard.getNumber("encP"), SmartDashboard.getNumber("encI"),
                 SmartDashboard.getNumber("encD"));

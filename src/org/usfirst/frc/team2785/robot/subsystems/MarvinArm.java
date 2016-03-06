@@ -1,8 +1,8 @@
 package org.usfirst.frc.team2785.robot.subsystems;
 
-import org.usfirst.frc.team2785.misc.PlayableSubsystem;
-import org.usfirst.frc.team2785.misc.Player;
-import org.usfirst.frc.team2785.misc.TableReader;
+import org.usfirst.frc.team2785.playback.PlayableSubsystem;
+import org.usfirst.frc.team2785.playback.Player;
+import org.usfirst.frc.team2785.playback.TableReader;
 import org.usfirst.frc.team2785.robot.Robot;
 import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.commands.TeleopMarvinArm;

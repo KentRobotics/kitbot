@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team2785.misc.Player;
-import org.usfirst.frc.team2785.misc.Recorder;
+import org.usfirst.frc.team2785.playback.Player;
+import org.usfirst.frc.team2785.playback.Recorder;
 import org.usfirst.frc.team2785.robot.commands.CalibrateMarvinArm;
 import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import org.usfirst.frc.team2785.robot.commands.Nothing;
@@ -61,24 +61,11 @@ public class Robot extends IterativeRobot {
         player = new Player();
         oi = new OI();
         //This gives us the nice radio buttons on the SmartDashboard
-        //chooser.addDefault("drive forward", new DriveDistance(60, 60, 0.5, 0.5));
-        //chooser.addObject("do a 180", new Turn(180, 0.75));
-        //chooser.addObject("debug mode", new Nothing());
-        //chooser.addObject("replay selected recording", new PlayRecordedTeleop());
-        /*
-         * TODO: implement, duh.
-         *  chooser.addObject("portcullis", new
-         * BreachPortcullis()); chooser.addObject("chevals", new
-         * BreachChevals()); chooser.addObject("moat", new BreachMoat());
-         * chooser.addObject("ramparts", new BreachRamparts());
-         * chooser.addObject("drawbridge", new BreachDrawbridge());
-         * chooser.addObject("sally port", new BreachSallyPort());
-         * chooser.addObject("rock wall", new BreachRockWall());
-         * chooser.addObject("rough terrain", new BreachTerrain());
-         */
+        chooser.addObject("turn off autonomous", new Nothing());
         chooser.addObject("ramparts", new BreachRamparts());
         chooser.addObject("rock wall", new BreachRockWall());
         chooser.addDefault("low bar", new BreachLowBar());
+
         recordingChooser.addObject("portcullis", RobotMap.portcullisFileName);
         recordingChooser.addObject("chevals", RobotMap.chevalsFileName);
         recordingChooser.addObject("moat", RobotMap.moatFileName);
@@ -88,16 +75,8 @@ public class Robot extends IterativeRobot {
         recordingChooser.addObject("rock wall", RobotMap.rockWallFileName);
         recordingChooser.addObject("rough terrain", RobotMap.roughTerrainFileName);
         recordingChooser.addDefault("low bar", RobotMap.lowBarFileName);
-        // (String) recordingChooser.getSelected();
-        //SmartDashboard.putData("Recording Name", recordingChooser);
-        // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
         //putting commands to the Dashboard makes nice little command buttons
-        //SmartDashboard.putData("Debug DriveDistance", new DriveDistance());
-        //SmartDashboard.putData("Debug Turn", new Turn());
-        //SmartDashboard.putData("Debug SetMarvinArm", new SetMarvinArm());
-        //SmartDashboard.putData("Replay Selected Recording", new PlayRecordedTeleop());
-        //SmartDashboard.putData("Debug MarvinArm", new CalibrateMarvinArm());
 
     }
 
@@ -127,13 +106,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousInit() {
         autonomousCommand = (Command) chooser.getSelected();
-
-        /*
-         * String autoSelected = SmartDashboard.getString("Auto Selector",
-         * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-         * = new MyAutoCommand(); break; case "Default Auto": default:
-         * autonomousCommand = new ExampleCommand(); break; }
-         */
 
         // schedule the autonomous command (example)
         if (autonomousCommand != null)

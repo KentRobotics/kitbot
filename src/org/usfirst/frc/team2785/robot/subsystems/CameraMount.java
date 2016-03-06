@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2785.robot.subsystems;
 
 import org.usfirst.frc.team2785.robot.RobotMap;
-import org.usfirst.frc.team2785.robot.commands.Nothing;
 import org.usfirst.frc.team2785.robot.commands.TeleopCamera;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -18,8 +17,6 @@ public class CameraMount extends Subsystem {
     private static USBCamera camera;
 
     public CameraMount(USBCamera cam) {
-        //horizontalServo = horizontal;
-        //verticalServo = vertical;
         camera = cam;
     }
 
@@ -32,7 +29,8 @@ public class CameraMount extends Subsystem {
     public void startServer() {
         CameraServer server = CameraServer.getInstance();
         server.setQuality(RobotMap.CAMERA_QUALITY);
-        server.setSize(1);// 320x240
+        server.setSize(1);
+        // 320x240
         server.startAutomaticCapture(camera);
     }
 

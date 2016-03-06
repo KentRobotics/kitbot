@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2785.robot.commands;
 
-import org.usfirst.frc.team2785.robot.OI;
 import org.usfirst.frc.team2785.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,14 +19,10 @@ public class TeleopCamera extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //Robot.cameraMount.resetPosition();
-        //Robot.cameraMount.startServer();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        //Robot.cameraMount.pushData();
-        //Robot.cameraMount.moveCamera(OI.happyStick.getX(), -OI.happyStick.getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

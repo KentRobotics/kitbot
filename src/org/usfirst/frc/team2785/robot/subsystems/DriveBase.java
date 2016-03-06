@@ -4,12 +4,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.*;
 
-import java.util.Date;
-
 import org.usfirst.frc.team2785.misc.DummyOutput;
-import org.usfirst.frc.team2785.misc.PlayableSubsystem;
-import org.usfirst.frc.team2785.misc.Player;
-import org.usfirst.frc.team2785.misc.TableReader;
+import org.usfirst.frc.team2785.playback.PlayableSubsystem;
+import org.usfirst.frc.team2785.playback.Player;
+import org.usfirst.frc.team2785.playback.TableReader;
 import org.usfirst.frc.team2785.robot.Robot;
 import org.usfirst.frc.team2785.robot.RobotMap;
 import org.usfirst.frc.team2785.robot.commands.TeleopDrive;;
@@ -55,7 +53,7 @@ public class DriveBase extends Subsystem implements PlayableSubsystem {
         resetEncoderDistance();
         leftPID.setContinuous();
         rightPID.setContinuous();
-        //debugInitPID();
+        debugInitPID();
         resetSensors();
     }
 

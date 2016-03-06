@@ -6,7 +6,8 @@ import org.usfirst.frc.team2785.robot.commands.DriveDistance;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * The name is misleading. 
+ * Proven to also breach moats and rocky terrain.
  */
 public class BreachRockWall extends CommandGroup {
 

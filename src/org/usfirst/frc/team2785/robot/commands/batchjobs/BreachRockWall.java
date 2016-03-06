@@ -28,6 +28,6 @@ public class BreachRockWall extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
         addSequential(new CalibrateMarvinArm());
-        addSequential(new DriveDistance(108*2, 108*2, 1, 1)); // approximate length
+        addSequential(new DriveDistance(108, 108, 1, 1)); // approximate length
     }
 }

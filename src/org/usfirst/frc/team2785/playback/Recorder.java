@@ -50,6 +50,7 @@ public class Recorder {
         return enabled;
     }
     public void write(String filePath) {
+    	
         try {
             FileOutputStream fileOut = new FileOutputStream(filePath);
             ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
